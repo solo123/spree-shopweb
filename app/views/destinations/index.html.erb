@@ -1,0 +1,25 @@
+<% content_for :head do %>
+<%= javascript_include_tag 'jquery.listnav.pack-2.1' %>
+<%= stylesheet_tags 'listnav' %>
+<script type="text/javascript">
+  $(function(){
+    $('#destList').listnav();
+  });
+</script>
+<% end %>
+<% content_for :breadcrumbs do %>
+    <li><a href="/home/index">Home</a></li>
+    <li>&raquo;</li>
+    <li>Destinations</li>
+<% end %>
+<h2>Destinations</h2>
+<div id="destList-nav"></div>
+<ul id="destList" class="destination-listing">
+  <% @destinations.each do |d| %>
+  
+  <li title="<%=h d.title%>">
+    <img src="<%= IMAGE_ROOT %>images/upload/destinationPics/DestTn_<%= d.title_pic %>.jpg" />
+<%= link_to d.title, d %></li>
+  <% end %>
+  <div class="clear"></div>
+</ul>

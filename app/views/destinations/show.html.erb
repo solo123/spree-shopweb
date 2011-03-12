@@ -1,0 +1,15 @@
+<% content_for :breadcrumbs do %>
+    <li><a href="/home/index">Home</a></li>
+    <li>&raquo;</li>
+    <li><a href="/destinations">Destinations</a></li>
+    <li>&raquo;</li>
+    <li><%= @destination.title %></li>
+<% end %>
+
+<%= render 'related_tours' %>
+<h2><%= @destination.title %></h2>
+<img src="<%= IMAGE_ROOT %>images/upload/destinationPics/DestTn_<%= @destination.title_pic %>.jpg" align="left" style="margin: 0 6px 0 0;" />
+<div style="font-size:1em;line-height: 1.62;margin-bottom:12px;">
+<%=h @destination.description.en %>
+</div>
+<%= render 'photos' %>

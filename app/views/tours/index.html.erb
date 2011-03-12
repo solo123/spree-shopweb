@@ -1,0 +1,29 @@
+<%
+  day = 0 %>
+<div class="tours">
+  <% @tours.each do |t| %>
+  <% if t.days > day
+    day = t.days
+    tit = "#{day} days tour"
+    if day > 3
+      tit = "4 and more days tour"
+      day = 10000
+    end
+  %>
+  <div class="clear"></div>
+  <h2>-- <%= tit %> --</h2>
+  <% end %>
+  <div class="tour">
+    <img src='<%= IMAGE_ROOT %>images/upload/TourPics/TourPic_<%=  t.id %>.jpg' width="45" height="34" align="left" />
+    <div>
+      <div class="tour-name">
+        <a href='/tours/<%=  t.id %>'>
+                <%=t.name %> <%= day_night_text(t.days) %>
+            </a>
+      </div>
+      <div class="price">Adult:$<%=t.price_adult%> Child:$<%=t.price_child%></div>
+    </div>
+  </div>
+  <% end %>
+  <div class="clear"></div>
+</div>

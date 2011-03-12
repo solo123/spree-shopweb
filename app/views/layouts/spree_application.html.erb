@@ -1,0 +1,51 @@
+<%= render :partial => 'shared/doc_and_xmlns'%>
+<head>
+<%= hook :inside_head do %>
+  <%= render :partial => 'shared/head'%>
+<% end %>
+</head>
+<body id="<%= @body_id %>">
+  <div id="header" class="container_bg">
+    <div class="container" style="width:980px;">
+      <img src="http://www.omeitravel.com/images/PageImg/topban_home.jpg" width="980" height="80" />
+      <%= render 'shared/main_menu' %>
+      <%= render 'shared/nav_bar' %>
+    </div>
+  </div>
+
+  <div id="wrapper" class="container">
+    <% if content_for?(:sidebar) %>
+    <div id="sidebar">
+      <%= hook :sidebar do %>
+        <%= yield :sidebar %>
+      <% end %>
+    </div>
+    <% end %>
+
+    <div id="content">
+      <div class="breadcrumbs">
+        <ul>
+          <%= yield :breadcrumbs %>
+        </ul>
+      </div>
+
+
+      <%= breadcrumbs(@taxon) if @taxon %>
+      <% if flash.notice %>
+      <div class="flash notice"><%= flash.notice %></div>
+      <% end %>
+      <% if flash[:error] %>
+      <div class="flash errors"><%= flash[:error] %></div>
+      <% end %>
+
+      
+
+      <%= yield %>
+    </div>
+
+    
+    <%= render :partial => 'shared/footer'%>
+  </div>
+
+</body>
+</html>

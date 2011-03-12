@@ -1,0 +1,62 @@
+<%  content_for :head do %>
+<style type="text/css">
+#tour_detail { width:48%; padding-right:8px; border-right:solid 1px #ccc; float:left; margin-bottom:6px; }
+#tour_dests {clear:both; margin-top:10px;}
+#tour_dests .pic {width: 150px; float:left;cursor:pointer;}
+#tour_dests .dest {padding-left:160px;}
+#tour_dests .clear {clear:both;margin-top:10px;}
+#tour_dests .day {margin-top:8px;margin-bottom:8px;background-color:#003300; color:#E8FCE8; font-size:120%; font-weight:bold; text-align:center;}
+#tour_dests a {display:block;}
+
+#order{float:right;width:40%;}
+</style>
+<% end %>
+
+
+<div class="main_lightGreen" style="padding:20px;">
+
+    <div id="tour_detail">
+        <div class="head">
+            <h2><%=h @tour.name %></h2>
+        </div>
+        <%=h @tour.description.en %>
+    </div>
+  <div id="order">
+    <%= form_for :order, :url => populate_orders_url do |f| %>
+    <input type="hidden" name="tours[<%= @tour.id %>]" value="1" />
+    Order Now!
+    <button type='submit' class='large primary'>
+      <%= image_tag('/images/add-to-cart.png') + t('add_to_cart') %>
+    </button>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+    <div id="tour_dests">
+        <%
+        cd = 0
+        image_path = ''
+        @tour_points.each do |dt|
+          dest = Destination.find(dt.destination_id)
+        if (dt["tour_day"] != cd)
+            cd = dt["tour_day"] %>
+            <div class="day">Day <%= cd %></div>
+     <% end %>
+
+        <div>
+          <div class="pic">
+            <img onclick="location='/destinations/<%= dt.destination_id %>'" src="<%= IMAGE_ROOT %>images/upload/destinationPics/DestTn_<%= dest.title_pic %>.jpg" alt="" />
+          </div>
+          <div class="dest">
+              <%= link_to dest.title, dest %>
+              <%=h dest.description.en %>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+    <% end %>
+    </div>
+
+    <p>
+        <%= link_to "Back to List", tours_url %>
+    </p>
+</div>
