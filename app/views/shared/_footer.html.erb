@@ -10,7 +10,7 @@ Logo type is  ("NETSP")
 <script type="text/javascript">SiteSeal("https://seal.networksolutions.com/images/colorsealwcpro.gif", "NETSP", "none");</script><img src="https://seal.networksolutions.com/images/colorsealwcpro.gif" style="border:none;cursor: pointer;" oncontextmenu="alert('This SiteSeal is protected');return false;" onclick="window.open(&quot;http://seals.networksolutions.com/siteseal_seek/siteseal?v_shortname=NETSP&amp;v_querytype=W&amp;v_search=www.omeitravel.com&amp;x=5&amp;y=5&quot;,&quot;NETSP&quot;,&quot;width=450,height=500,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no&quot;);return false;">
                             </td>
                             <td class="address">
-                                <%= raw  Page.find_by_permalink('footer_address').body %>
+                                <%= render '/shared/cms_page', :cms_title => 'page.footer.address' %>
                             </td>
                         </tr>
                     </tbody></table>
