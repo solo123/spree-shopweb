@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   resources :destinations
   resources :tours
   resources :pages
+  
+  namespace :admin do
+    resources :destinations
+  end
 end
