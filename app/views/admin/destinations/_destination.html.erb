@@ -1,0 +1,13 @@
+<tr>
+	<td><%= destination.id %></td>
+	<td><%= destination.title %></td>
+	<td><%= destination.city %></td>
+	<td><%= destination.state %></td>
+	<td><%= destination.country %></td>
+	<td><%= destination.created_at.localtime if destination.created_at %></td>
+	<td><%= destination.updated_at.localtime if destination.updated_at %></td>
+	<td><%= destination.status %></td>
+	<td><%= link_to 'Show', destination %></td>
+	<td><%= link_to 'Edit', edit_destination_path(destination), :remote => true %></td>
+	<td><%= link_to 'Destroy', destination, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>
+</tr>

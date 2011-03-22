@@ -1,6 +1,6 @@
 <%= render :partial => 'admin/shared/product_sub_menu' %>
 
-<table class="index">
+<table class="index" id="destinations">
   <tr>
     <th><%= t("id") %></th>
 	<th><%= t("title") %></th>
@@ -13,20 +13,12 @@
     </th>
   </tr>
 <% @collection.each do |destination| %>
-	<tr>
-		<td><%= destination.id %></td>
-		<td><%= destination.title %></td>
-		<td><%= destination.city %></td>
-		<td><%= destination.state %></td>
-		<td><%= destination.country %></td>
-		<td><%= destination.created_at.localtime if destination.created_at %></td>
-		<td><%= destination.updated_at.localtime if destination.updated_at %></td>
-		<td><%= destination.status %></td>
-	</tr>
+	<%= render destination %>
 <% end %>
 </table>
 <%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
 
-<%= form_for @destination, :remote => true do |f| %>
-  <%= @destination.title %>
-<% end %>
+<h2>Destination form</h2>
+<div id="form">
+	<%= render :partial => "form"%>
+</div>
