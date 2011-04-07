@@ -1,4 +1,4 @@
-<tr>
+<tr id="<%= dom_id destination%>">
 	<td><%= destination.id %></td>
 	<td><%= destination.title %></td>
 	<td><%= destination.city %></td>
@@ -8,6 +8,6 @@
 	<td><%= destination.updated_at.localtime if destination.updated_at %></td>
 	<td><%= destination.status %></td>
 	<td><%= link_to 'Show', destination %></td>
-	<td><%= link_to 'Edit', edit_destination_path(destination), :remote => true %></td>
+	<td><%= link_to 'Edit', edit_admin_destination_path(destination), :remote => true %></td>
 	<td><%= link_to 'Destroy', destination, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>
 </tr>
