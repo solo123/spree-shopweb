@@ -1,20 +1,20 @@
 <ul class="main-menu">
-  <li class="menu"><a href="/home/index">Home</a></li>
+  <li class="menu<%= ' current' if controller_name == 'home' %>"><a href="/home/index">Home</a></li>
   <li>|</li>
-  <li class="menu current"><a href="/destinations">Destination</a></li>
+  <li class="menu<%= ' current' if controller_name == 'destinations' %>"><a href="/destinations">Destination</a></li>
   <li>|</li>
-  <li class="menu"><a href="/tours/bus">Bus Tour</a></li>
+  <li class="menu<%= ' current' if controller_name == 'tours' && params[:id] == 'bus' %>"><a href="/tours/bus">Bus Tour</a></li>
   <li>|</li>
-  <li class="menu"><a href="/tours/package">Package</a></li>
+  <li class="menu<%= ' current' if controller_name == 'tours' && params[:id] == 'package' %>"><a href="/tours/package">Package</a></li>
   <li>|</li>
-  <li class="menu"><a href="/tours/cruise">Cruise</a></li>
+  <li class="menu<%= ' current' if controller_name == 'tours' && params[:id] == 'cruise' %>"><a href="/tours/cruise">Cruise</a></li>
   <li>|</li>
   <li class="menu"><a href="#">Airline Ticket</a></li>
   <li>|</li>
   <li class="menu"><a href="#">Hotel</a></li>
   <li>|</li>
-  <li class="menu"><a href="/pages/rent-bus">Rent Bus</a></li>
+  <li class="menu<%= ' current' if controller_name == 'pages' && params[:id] == 'rent-bus' %>"><a href="/pages/rent-bus">Rent Bus</a></li>
   <li>|</li>
-  <li class="menu"><a href="/pages/about-us">About Us</a></li>
+  <li class="menu<%= ' current' if controller_name == 'pages' && params[:id] == 'about-us' %>"><a href="/pages/about-us">About Us</a></li>
   <div class="clear" ></div>
 </ul>

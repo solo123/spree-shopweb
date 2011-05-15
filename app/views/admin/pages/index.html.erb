@@ -1,0 +1,55 @@
+<%#= render :partial => 'admin/shared/product_sub_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_page_link">
+      <%= button_link_to t("new_page"), new_object_url, {:remote => true, :icon => 'add', :id => 'admin_new_page'} %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= "#{t("actions.listing")} #{t("pages")}" %></h1>
+
+<div id="new_page"></div>
+
+<table class="index" id='listing_pages'>
+  <tr>
+      <th>permalink</th>
+      <th>title</th>
+      <th>publish_at</th>
+	    <th>Action</th>
+  </tr>
+<% @collection.each do |page| %>
+  <tr <%= 'style="color:red;"' if page.deleted? %> id="<%= dom_id page %>">
+    <%- locals = {:page => page} %>
+      <td><%= page.permalink %></td>
+      <td><%= page.title %></td>
+      <td><%= page.publish_at %></td>
+    <td class="actions">
+        <%= link_to_edit page, :class => 'edit' unless page.deleted?  %>
+        &nbsp;
+        <%= link_to_clone page, :class => 'clone' %>
+        &nbsp;
+        <%= link_to_delete page unless page.deleted?  %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
+
+<% content_for :sidebar do %>
+    <%= form_for [:admin, @search] do |f| %>
+      <div class="box">
+        <h3><%= t(:search) %></h3>
+
+        <%- locals = {:f => f} %>
+  
+
+          <p class="form-buttons">
+            <%= button t("search") %>
+          </p>
+      </div>
+  <% end %>
+<% end %>
+

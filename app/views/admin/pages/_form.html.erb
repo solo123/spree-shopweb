@@ -1,0 +1,45 @@
+<div class="yui-gc">
+  <div class="yui-u first">
+    <%- locals = {:f => f} %>
+
+      <%= f.field_container :title do %>
+        <%= f.label :title, t("title") %> <span class="required">*</span><br />
+        <%= f.text_field :title, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :title %>
+      <% end %>
+
+      <%= f.field_container :permalink do %>
+        <%= f.label :permalink, t("permalink") %> <span class="required">*</span><br />
+        <%= f.text_field :permalink, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :permalink %>
+      <% end %>
+
+      <%= f.field_container :body do %>
+        <%= f.label :body, t("body")%><br />
+        <%= f.text_area :body, {:cols => 60, :rows => 4, :class => 'fullwidth'} %>
+        <%= f.error_message_on :body %>
+      <% end %>
+ 
+  </div>
+  <div class="yui-u">
+  </div>
+</div>
+
+<h2><%= t("metadata") %></h2>
+<%= hook :admin_product_form_meta, locals do %>
+  <p>
+    <%= f.label :meta_keywords, t("meta_keywords")%><br />
+    <%= f.text_field :meta_keywords, :class => 'fullwidth' %>
+  </p>
+  <p>
+    <%= f.label :meta_description, t("meta_description")%><br />
+    <%= f.text_field :meta_description, :class => 'fullwidth' %>
+  </p>
+<% end %>
+
+
+<%= hook :admin_product_form_additional_fields, locals do %>
+  <% Variant.additional_fields.select{|af| af[:only].nil? || af[:only].include?(:product) }.each do |field| %>
+    <%= render :partial => "admin/shared/additional_field", :locals => {:field => field, :f => f} %>
+  <% end %>
+<% end %>
