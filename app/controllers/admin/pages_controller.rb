@@ -5,9 +5,7 @@ class Admin::PagesController < Admin::ResourceController
     unless request.xhr?
       params[:search] ||= {}
       # Note: the MetaSearch scopes are on/off switches, so we need to select "not_deleted" explicitly if the switch is off
-      if params[:search][:deleted_at_is_null].nil?
-        params[:search][:deleted_at_is_null] = "1"
-      end
+
 
       params[:search][:meta_sort] ||= "name.asc"
       @search = super.metasearch(params[:search])

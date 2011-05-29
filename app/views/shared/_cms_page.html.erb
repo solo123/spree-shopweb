@@ -1,7 +1,8 @@
 <% cms = Page.find_by_permalink(cms_title)
-	if cms
+	if !cms
+		cms = Page.new
+		cms.permalink = cms_title
+		cms.save
+	end
 -%>
 <%= raw  cms.body %>
-<% else -%>
-CMS:[<%= cms_title %>] not found.
-<% end %>

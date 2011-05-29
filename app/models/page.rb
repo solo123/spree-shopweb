@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
 	def deleted?
-    !!deleted_at
+    is_active && is_active == 1
   end
 end
