@@ -1,4 +1,4 @@
-class Admin::DestinationsController < Admin::BaseController
+class Admin::ToursController < Admin::BaseController
   respond_to :html, :js
   #resource_controller
   
@@ -7,8 +7,8 @@ class Admin::DestinationsController < Admin::BaseController
   #end
   
   def index
-  	@search = Destination.search(params[:search])
-  	@destination = Destination.new
+  	@search = Tour.search(params[:search])
+  	@tour = Tour.new
     return @collection if @collection.present?
    	@collection = @search.all.paginate(
    		:per_page  => Spree::Config[:admin_products_per_page],
@@ -16,16 +16,16 @@ class Admin::DestinationsController < Admin::BaseController
   end
   
   def edit
-    @destination = Destination.find(params[:id])
+    @tour = Tour.find(params[:id])
   end
 	def new
-		@destination = Destination.new
+		@tour = Tour.new
 	end
   def create
-    @destination = Destination.new(params[:destination])
+    @tour = Tour.new(params[:tour])
     respond_to do |format|
-      if @destination.save
-        format.html { redirect_to(@destination, :notice => 'Destination was successfully created.') }
+      if @tour.save
+        format.html { redirect_to(@tour, :notice => 'Tour was successfully created.') }
         format.js
       else
         format.html { render :action => "new" }
@@ -36,11 +36,11 @@ class Admin::DestinationsController < Admin::BaseController
   # PUT /entries/1
   # PUT /entries/1.xml
   def update
-    @destination = Destination.find(params[:id])
+    @tour = Tour.find(params[:id])
 
     respond_to do |format|
-      if @destination.update_attributes(params[:destination])
-        format.html { redirect_to(@destination, :notice => 'Destination was successfully updated.') }
+      if @tour.update_attributes(params[:tour])
+        format.html { redirect_to(@tour, :notice => 'Tour was successfully updated.') }
         format.js
       else
         format.html { render :action => "edit" }

@@ -18,22 +18,22 @@ $(function(){
   		<%= button t('search') %>
 			<% end %>
   	</li>
-    <li id="edit_destination_link">
-      <a href="destinations/new" class="button" data-remote="true" id="admin_edit_destination">
-      	<span><img alt="Add" src="/images/admin/icons/add.png?1305355888"> New Destination</span></a>
+    <li id="edit_tour_link">
+      <a href="tours/new" class="button" data-remote="true" id="admin_edit_tour">
+      	<span><img alt="Add" src="/images/admin/icons/add.png?1305355888"> New Tour</span></a>
     </li>
   </ul>
   <br class="clear">
 </div>
 
 <div id="edit_div" style="display:none;width:300px;">
-<h2>Destination form</h2>
+<h2>Tour form</h2>
 <div id="form">
 	<%= render :partial => "form"%>
 </div>
 </div>
 
-<table class="index" id="destinations">
+<table class="index" id="tours">
   <tr>
     <th><%= t("id") %></th>
 	<th><%= t("title") %></th>
@@ -45,8 +45,8 @@ $(function(){
 	<th><%= t("status")%></th>
   <th>operate</th>
   </tr>
-<% @collection.each do |destination| %>
-	<%= render destination %>
+<% @collection.each do |tour| %>
+	<%= render tour %>
 <% end %>
 </table>
 <%= will_paginate(@collection, :previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>

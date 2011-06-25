@@ -1,0 +1,15 @@
+<tr id="<%= dom_id tour%>">
+	<td><%= tour.id %></td>
+	<td><%= tour.title %></td>
+	<td><%= destination.city %></td>
+	<td><%= destination.state %></td>
+	<td><%= destination.country %></td>
+	<td><%= destination.created_at.localtime if destination.created_at %></td>
+	<td><%= destination.updated_at.localtime if destination.updated_at %></td>
+	<td><%= destination.status %></td>
+	<td>
+		<%= link_to 'Show', tour %> |
+		<%= link_to 'Edit', edit_admin_tour_path(tour), :remote => true %> |
+		<%= link_to 'Destroy', tour, :confirm => 'Are you sure?', :method => :delete, :remote => true %>
+	</td>
+</tr>
