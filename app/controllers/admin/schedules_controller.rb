@@ -1,4 +1,4 @@
-class Admin::ToursController < Admin::ResourceController
+class Admin::SchedulesController < Admin::ResourceController
   
   private
 	def collection
@@ -8,7 +8,7 @@ class Admin::ToursController < Admin::ResourceController
                             :per_page  => Spree::Config[:admin_products_per_page],
                             :page      => params[:page]}
                             
-    @search = Tour.search(params[:search])
+    @search = Schedule.search(params[:search])
     @collection = @search.paginate(pagination_options)
 
   

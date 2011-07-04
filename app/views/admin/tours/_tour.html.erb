@@ -1,9 +1,6 @@
 <tr id="<%= dom_id tour%>">
 	<td><%= tour.id %></td>
 	<td><%= tour.title %></td>
-	<td><%= destination.city %></td>
-	<td><%= destination.state %></td>
-	<td><%= destination.country %></td>
 	<td><%= destination.created_at.localtime if destination.created_at %></td>
 	<td><%= destination.updated_at.localtime if destination.updated_at %></td>
 	<td><%= destination.status %></td>

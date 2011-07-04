@@ -9,5 +9,14 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :destinations
     resources :pages
+    resources :photos
+    resources :tours
+    resources :schedules
+    resources :hotels
+    
+    resources :companies
+    resources :employees
+    resources :vehicles
+    resources :user_infos
   end
 end

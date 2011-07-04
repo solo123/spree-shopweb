@@ -12,9 +12,6 @@ $(function(){
   	<li>
   		<%= form_for [:admin, @search] do |f| %>
   		<%= f.label :title_contains, "Title" %> <%= f.text_field :title_contains, :size => 15 %> &nbsp;
-  		<%= f.label :city_contains, "City" %> <%= f.text_field :city_contains, :size => 15 %> &nbsp;
-  		<%= f.label :state_contains, "State" %> <%= f.text_field :state_contains, :size => 15 %> &nbsp;
-  		<%= f.label :country_contains, "Country" %> <%= f.text_field :country_contains, :size => 15 %> &nbsp;
   		<%= button t('search') %>
 			<% end %>
   	</li>
@@ -37,9 +34,7 @@ $(function(){
   <tr>
     <th><%= t("id") %></th>
 	<th><%= t("title") %></th>
-	<th><%= t("city") %></th>
-	<th><%= t("state")%></th>
-	<th><%= t("country")%></th>
+	<th><%= t("title_cn") %></th>
 	<th><%= t("created_at")%></th>
 	<th><%= t("updated_at")%></th>
 	<th><%= t("status")%></th>
