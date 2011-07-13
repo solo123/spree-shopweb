@@ -5,13 +5,17 @@
 <%= form_tag(admin_general_settings_path, :method => :put) do %>
 
   <p>
-	<label><%= t("site_name") %></label>
-	<%= text_field_tag('preferences[site_name]', Spree::Config[:site_name]) %>
+		<label><%= t("site_name") %></label><br />
+		<%= text_field_tag('preferences[site_name]', Spree::Config[:site_name], :class => 'yui-main')  %>
   </p>
   <p>
-	<label><%= t('site_url') %></label>
+	<label><%= t('site_url') %></label><br />
 	<%= text_field_tag('preferences[site_url]', Spree::Config[:site_url])%>
   </p>	
+  <p>
+  	<label><%= t("site_logo") %></label><br />
+	<%= text_field_tag('preferences[admin_interface_logo]', Spree::Config[:admin_interface_logo]) %>
+  </p>
   <p>
     <label>
 	  <input name="preferences[allow_ssl_in_production]" type="hidden" value="0" />
@@ -28,10 +32,7 @@
     </label>
   </p>
   
-  <p>
-  	<label><%= t("site_name") %></label>
-	<%= text_field_tag('preferences[admin_interface_logo]', Spree::Config[:admin_interface_logo]) %>
-  </p>
+
 
   <p class="form-buttons">
     <%= button t('update') %> 

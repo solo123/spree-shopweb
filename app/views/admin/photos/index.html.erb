@@ -24,7 +24,7 @@
 <% @collection.each do |p| %>
   <tr id="<%= dom_id p %>">
       <td><%= p.id %></td>
-      <td><%= p.title %></td>
+      <td><%= p.alt %></td>
     <td class="actions">
         <%= link_to_edit p, :class => 'edit'   %>
         &nbsp;
@@ -37,15 +37,40 @@
 </table>
 <%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
 
+<% if @destination %>
+
+<div id="photos"></div>
+<br/>
+<p>
+    <%= link_to icon('add') + ' ' + t("new_photo"), new_admin_destination_photo_url(@destination), :id => "new_photo_link" %>
+</p>
+
+<% content_for :head do %>
+  <script type="text/javascript">
+    jQuery(document).ready(function(){
+
+      jQuery('#new_photo_link').click(function (event) {
+        event.preventDefault();
+        jQuery(this).hide();
+        jQuery.ajax({type: 'GET', url: this.href, data: ({authenticity_token: AUTH_TOKEN}), success: function(r){ jQuery('#photos').html(r);} });
+      });
+
+    });
+  </script>
+<% end %>
+<% end %>
 <% content_for :sidebar do %>
     <%= form_for [:admin, @search] do |f| %>
       <div class="box">
-        <h3><%= t(:search) %></h3>
-
-          <p class="form-buttons">
-            <%= button t("search") %>
-          </p>
+      	<ul>
+      		<li>
+      			<%= t("all_photos") %>
+      			<ul>
+      				<li>Destinations</li>
+      				<li>Tours</li>
+      			</ul>
+      		</li>
+      	</ul>
       </div>
     <% end %>
 <% end %>
-

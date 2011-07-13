@@ -1,0 +1,30 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<h1><%= t('destination')%></h1>
+
+<p>
+	<b>Title:</b> <%= @destination.title %>
+	<b>Title cn:</b> <%= @destination.title_cn %>
+</p>
+
+<p>
+	<b>Description:</b><br />
+	<div><%= @destination.description.en %></div>
+</p>
+
+<p>
+	<b>Description:</b><br />
+	<div><%= @destination.description.cn %></div>
+</p>
+
+<%= form_for [:admin, @destination], :html => { :multipart => true } do |form| %>
+	<ol>
+		<li>
+			<%= form.label :destination_photos, "photo" %>
+			<%= form.file_field :destination_photos %>
+		</li>
+		<li>
+			<%= form.submit "Submit" %>
+		</li>
+	</ol>
+<% end %>

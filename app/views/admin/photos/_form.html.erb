@@ -1,0 +1,11 @@
+<tr>
+  <td><%= t("filename") %>:</td>
+  <td><%= f.file_field :attachment %></td>
+</tr>
+
+  <%= hidden_field_tag :destination_id, @destination.id %>
+
+<tr>
+  <td><%= t("alt_text") %>:</td>
+  <td><%= f.text_area :alt %></td>
+</tr>

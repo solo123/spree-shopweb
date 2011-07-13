@@ -5,7 +5,7 @@
 	<td><%= destination.created_at.localtime if destination.created_at %></td>
 	<td><%= destination.updated_at.localtime if destination.updated_at %></td>
 	<td><%= destination.status %></td>
-	<td><%= link_to 'Show', destination %> |
+	<td><%= link_to 'Show', admin_destination_path(destination) %> |
 	<%= link_to 'Edit', edit_admin_destination_path(destination), :remote => true %> |
 	<%= link_to 'Destroy', destination, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>
 </tr>

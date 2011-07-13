@@ -1,0 +1,4 @@
+<%= f.field_container :location_id do %>
+	<%= f.label :location_id %>:
+	<%= select(:destination, :location_id, Location.all.collect{|loc| [loc.title, loc.id]}, {:prompt => 'Select Location'}) %>  	
+<% end %>

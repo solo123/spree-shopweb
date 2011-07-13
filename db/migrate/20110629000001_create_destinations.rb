@@ -4,7 +4,7 @@ class CreateDestinations < ActiveRecord::Migration
     	t.integer :title_pic
     	t.string :title
     	t.string :title_cn
-    	t.integer :location
+    	t.integer :location_id
     	t.integer :status
     	t.timestamps
     end
@@ -16,10 +16,9 @@ class CreateDestinations < ActiveRecord::Migration
     	t.timestamps
     end
     create_table :locations do |t|
-    	t.integer :parent_id
+    	t.string :abbr
     	t.string :title
     	t.string :title_cn
-    	t.string :zip_code
     end
     create_table :photos do |t|
     	t.string :ref_type
@@ -48,7 +47,7 @@ class CreateDestinations < ActiveRecord::Migration
     	t.integer :status, :default => 0
     	t.timestamps
     end
-    create_table :tours_destinations, :id => false do |t|
+    create_table :destinations_tours, :id => false do |t|
     	t.integer :tour_id
     	t.integer :destination_id
     	t.integer :visit_order
@@ -107,7 +106,7 @@ class CreateDestinations < ActiveRecord::Migration
     drop_table :locations
     drop_table :photos
     drop_table :tours
-    drop_table :tours_destinations
+    drop_table :destinations_tours
     drop_table :schedules
     drop_table :hotels
     drop_table :hotels_schedules
