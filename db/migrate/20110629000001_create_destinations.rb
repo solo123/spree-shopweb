@@ -1,7 +1,7 @@
 class CreateDestinations < ActiveRecord::Migration
   def self.up
     create_table :destinations do |t|
-    	t.integer :title_pic
+    	t.integer :photo_id
     	t.string :title
     	t.string :title_cn
     	t.integer :location_id
@@ -16,6 +16,7 @@ class CreateDestinations < ActiveRecord::Migration
     	t.timestamps
     end
     create_table :locations do |t|
+      t.integer :parent_id
     	t.string :abbr
     	t.string :title
     	t.string :title_cn
@@ -52,6 +53,9 @@ class CreateDestinations < ActiveRecord::Migration
     	t.integer :destination_id
     	t.integer :visit_order
     	t.integer :visit_day
+    	t.integer :status, :default => 0
+    	t.integer :edited_by, :default => 0
+    	t.timestamps
     end
     create_table :schedules do |t|
     	t.integer :tour_id

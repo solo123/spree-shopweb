@@ -8,8 +8,8 @@
 
 <%= render 'related_tours' %>
 <h2><%= @destination.title %></h2>
-<img src="<%= IMAGE_ROOT %>images/upload/destinationPics/DestTn_<%= @destination.title_pic %>.jpg" align="left" style="margin: 0 6px 0 0;" />
+<%= image_tag @destination.photo.attachment.url(:small) if @destination.photo %>
 <div style="font-size:1em;line-height: 1.62;margin-bottom:12px;">
-<%=h @destination.description.en %>
+	<%=h @destination.description.en %>
 </div>
 <%= render 'photos' %>

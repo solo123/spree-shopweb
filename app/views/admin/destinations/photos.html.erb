@@ -1,10 +1,13 @@
 <%= render :partial => 'admin/shared/product_sub_menu' %>
-
+<h1>Destinations Photos</h1>
 <% @collection.each do |d| %>
 <div style="width:150px;height:300px;float:left;border:solid 1px #999; padding:4px;margin:4px;">
-	<img style="padding:2px;border:solid 1px #ccc;width:100px;height:100px;" /><br />
+	<div style="width:120px;height:120px;padding:2px;border:solid 1px #aaa;text-align:center;vertical-align:middle;">
+		<%= image_tag(d.photo.attachment.url(:small)) if d.photo %>
+	</div>
 	<div><%= d.title %></div>
 	<div><%= d.title_cn %></div>
+	<div><a href='<%= d.id %>/photos'>edit photos</a></div>
 </div>
 <% end %>
 <%= will_paginate(@collection, :previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>

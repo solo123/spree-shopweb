@@ -16,10 +16,10 @@
 <div id="destList-nav"></div>
 <ul id="destList" class="destination-listing">
   <% @destinations.each do |d| %>
-  
-  <li title="<%=h d.title%>">
-    <img src="<%= IMAGE_ROOT %>images/upload/destinationPics/DestTn_<%= d.title_pic %>.jpg" />
-<%= link_to d.title, d %></li>
+  	<li title="<%=h d.title%>">
+	  	<%= image_tag d.photo.attachment.url(:small) if d.photo %>
+			<%= link_to d.title, d %>
+		</li>
   <% end %>
   <div class="clear"></div>
 </ul>

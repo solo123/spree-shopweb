@@ -2,7 +2,7 @@
 
 <%= render "shared/error_messages", :target => @photo %>
 <%= form_for(:photo, :url => admin_destination_photo_url(@destination), :html => { :method => :put, :multipart => true }) do |f| %>
-  <table class="basic-table">
+  <table class="basic-table" style='width:auto;'>
     <tr>
       <td><%= t("thumbnail") %>:</td>
       <td><%= link_to(image_tag(@photo.attachment.url(:mini)), @photo.attachment.url(:destination)) %></td>
@@ -11,6 +11,6 @@
   </table>
   <p class="form-buttons">
     <%= button t("update") %>
-    <%= t('or') %> <%= link_to t("cancel"), admin_product_images_url(@destination), :id => "cancel_link" %>
+    <%= t('or') %> <%= link_to t("cancel"), admin_destination_photos_url(@destination), :id => "cancel_link" %>
   </p>
 <% end %>

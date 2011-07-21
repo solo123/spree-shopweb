@@ -1,11 +1,15 @@
 <tr id="<%= dom_id tour%>">
 	<td><%= tour.id %></td>
-	<td><%= tour.title %></td>
-	<td><%= destination.created_at.localtime if destination.created_at %></td>
-	<td><%= destination.updated_at.localtime if destination.updated_at %></td>
-	<td><%= destination.status %></td>
+	<td><%= tour.title %><br /><%= tour.title_cn %></td>
+	<td><%= tour.tour_type %></td>
+	<td><%= tour.days %></td>
+	<td><%= tour.is_auto_gen > 0 ? tour.weekly : '---' %></td>
+	<td><%= tour.price_adult %> / <%= tour.price_child %></td>
+	<td><%= tour.created_at.localtime if tour.created_at %></td>
+	<td><%= tour.updated_at.localtime if tour.updated_at %></td>
+	<td><%= tour.status %></td>
 	<td>
-		<%= link_to 'Show', tour %> |
+		<%= link_to 'Route', admin_tour_spots_path(tour) %> |
 		<%= link_to 'Edit', edit_admin_tour_path(tour), :remote => true %> |
 		<%= link_to 'Destroy', tour, :confirm => 'Are you sure?', :method => :delete, :remote => true %>
 	</td>

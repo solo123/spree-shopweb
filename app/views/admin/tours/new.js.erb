@@ -1,2 +1,2 @@
 $("#form > form").replaceWith("<%= escape_javascript(render(:partial => "form"))%>");
-$('#edit_div').dialog('open');
+$('#edit_div').dialog('option', 'title', 'New Tour *').dialog('open');

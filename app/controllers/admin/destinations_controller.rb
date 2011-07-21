@@ -1,6 +1,6 @@
 class Admin::DestinationsController < Admin::ResourceController
 
-	def images
+	def photos
 		collection
 	end
 	

@@ -6,6 +6,8 @@ class Photo < Asset
                     :url => "/assets/destinations/:id/:style/:basename.:extension",
                     :path => ":rails_root/public/assets/destinations/:id/:style/:basename.:extension"
 
+  belongs_to :destination
+
   # save the w,h of the original image (from which others can be calculated)
   # we need to look at the write-queue for images which have not been saved yet
   after_post_process :find_dimensions

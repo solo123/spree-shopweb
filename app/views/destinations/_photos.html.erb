@@ -1,5 +1,5 @@
 <% content_for :head do %>
-<%= javascript_include_tag 'galleria/galleria.js' %>
+<%= javascript_include_tag 'galleria/galleria-1.2.4.min.js' %>
 <script type="text/javascript">
   $(function(){
     Galleria.loadTheme('/javascripts/galleria/themes/classic/galleria.classic.js');
@@ -13,8 +13,9 @@
 
  <div id="galleria">
    <% @photos.each do |p| %>
-    <a href="<%= IMAGE_ROOT %>images/upload/destinationPics/DestPic_<%= p.id %>.jpg">
-        <img title="<%= p.title %>" src="<%= IMAGE_ROOT %>images/upload/destinationPics/DestTn_<%= p.id %>.jpg" />
+   
+    <a href="<%= p.attachment.url(:large) %>">
+    	<%= image_tag p.attachment.url(:small) %>
     </a>
    <% end %>
 </div>

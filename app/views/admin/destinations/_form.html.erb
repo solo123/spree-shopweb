@@ -1,3 +1,4 @@
+<% @destination.build_description if !@destination.description %>
 <%= form_for([:admin, @destination], :remote => true) do |f| %>
 	<div class="yui-g">
 		<div class="yui-u first">
@@ -13,7 +14,7 @@
 	  <% end %>
   	</div>
   </div>
-  
+
   <%= f.fields_for :description do |desc| %>
   <div class="yui-g">
   	<div class="yui-u first">
@@ -36,7 +37,7 @@
   </div>
   
   
-  <%= f.field_container :title_cn do %>
+  <%= f.field_container :status do %>
     <%= f.label :status %><br />
     <%= f.text_field :status %>
   <% end %>

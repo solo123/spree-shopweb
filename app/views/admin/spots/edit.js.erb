@@ -1,0 +1,4 @@
+$("#edit_div")
+	.html("<%= escape_javascript(render(:partial => "form"))%>")
+	.dialog('option', 'title', 'Spot ID: <%= @spot.id %> (edit)')
+	.dialog('open');

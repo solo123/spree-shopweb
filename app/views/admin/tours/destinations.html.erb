@@ -1,0 +1,37 @@
+<% content_for :head do %>
+<script type="text/javascript">
+$(function(){
+	$('#edit_div').dialog({ autoOpen: false, width: 700});
+});
+</script>
+<% end %>
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<div class="toolbar">
+  <ul class="actions">
+    <li id="edit_tour_link">
+      <a href="tours/new" class="button" data-remote="true" id="admin_edit_tour">
+      	<span><img alt="Add" src="/images/admin/icons/add.png?1305355888">New Tour</span></a>
+    </li>
+  </ul>
+  <br class="clear">
+</div>
+
+<div id="edit_div" style="display:none;">
+<div id="form"><form></form></div>
+</div>
+
+<table class="index" id="tours">
+  <tr>
+    <th><%= t("id") %></th>
+	<th><%= t("title") %></th>
+	<th><%= t("created_at")%></th>
+	<th><%= t("updated_at")%></th>
+	<th><%= t("status")%></th>
+  <th>operate</th>
+  </tr>
+<% @tour.destinations_tours.each do |td| %>
+	<%= render 'tour_dest', :td => td %>
+<% end %>
+</table>
+

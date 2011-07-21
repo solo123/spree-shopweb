@@ -3,74 +3,29 @@
 <div class='toolbar'>
   <ul class='actions'>
     <li id="new_photo_link">
-      <%= button_link_to t("new_photo"), new_object_url, {:remote => true, :icon => 'add', :id => 'admin_new_photo'} %>
+      <%= button_link_to t("new_photo"), new_admin_destination_photo_path, {:remote => true, :icon => 'add', :id => 'admin_new_photo'} %>
     </li>
   </ul>
   <br class='clear' />
 </div>
 
-<h1><%= "#{t("actions.listing")} #{t("photos")}" %></h1>
-
+<h1><%= image_tag( (@destination.photo ? @destination.photo.attachment.url(:mini) : 'coming_soon_100.png'), :style => 'border:solid 1px #aaa;padding:1px;', :id => 'dest_photo') %><%= "#{@destination.title}/#{@destination.title_cn}" %></h1>
+<%= link_to 'Back to destinations list', '../photos' %>
 <div id="new_photo"></div>
 
-<table class="index" id='listing_photos'>
-  <tr>
-      <th><%= t("sku") %></th>
-      <th><%= t("abc") %></th>
-      <th><%= t("ddd") %></th>
-    <th>
-    </th>
-  </tr>
+<div>
 <% @collection.each do |p| %>
-  <tr id="<%= dom_id p %>">
-      <td><%= p.id %></td>
-      <td><%= p.alt %></td>
-    <td class="actions">
-        <%= link_to_edit p, :class => 'edit'   %>
-        &nbsp;
-        <%= link_to_clone p, :class => 'clone' %>
-        &nbsp;
-        <%= link_to_delete p  %>
-    </td>
-  </tr>
+	<div style="width:150px;height:300px;float:left;border:solid 1px #999; padding:4px;margin:4px;">
+		<%= image_tag p.attachment.url(:small) %><br />
+		<div><%= p.attachment_file_name %></div>
+		<div><%= p.alt %></div>
+		<div>
+        <%= link_to image_tag('/images/admin/icons/edit.png') + 'Edit', edit_admin_destination_photo_path(@destination, p), :class => 'edit'   %>
+        &nbsp;|&nbsp;
+        <%= link_to_delete p  %><br />
+        <%= link_to 'Set as cover', "photos/#{p.id}/cover", {:remote => true, :icon => 'add'} %>
+		</div>
+	</div>  
 <% end %>
-</table>
-<%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
-
-<% if @destination %>
-
-<div id="photos"></div>
-<br/>
-<p>
-    <%= link_to icon('add') + ' ' + t("new_photo"), new_admin_destination_photo_url(@destination), :id => "new_photo_link" %>
-</p>
-
-<% content_for :head do %>
-  <script type="text/javascript">
-    jQuery(document).ready(function(){
-
-      jQuery('#new_photo_link').click(function (event) {
-        event.preventDefault();
-        jQuery(this).hide();
-        jQuery.ajax({type: 'GET', url: this.href, data: ({authenticity_token: AUTH_TOKEN}), success: function(r){ jQuery('#photos').html(r);} });
-      });
-
-    });
-  </script>
-<% end %>
-<% end %>
-<% content_for :sidebar do %>
-    <%= form_for [:admin, @search] do |f| %>
-      <div class="box">
-      	<ul>
-      		<li>
-      			<%= t("all_photos") %>
-      			<ul>
-      				<li>Destinations</li>
-      				<li>Tours</li>
-      			</ul>
-      		</li>
-      	</ul>
-      </div>
-    <% end %>
-<% end %>
+	<div class='clear'></div>
+</div>

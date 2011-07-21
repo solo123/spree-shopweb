@@ -8,17 +8,25 @@ Rails.application.routes.draw do
   
   
   namespace :admin do
-    match 'destinations/photos' => 'destinations#images'
+    match 'destinations/photos' => 'destinations#photos'
     resources :destinations do
     	resources :photos do
         collection do
           post :update_positions
         end
+        match 'cover' => 'photos#cover'
       end
     end
     resources :pages
     resources :photos
-    resources :tours
+    resources :tours do
+      match 'destinations' => 'tours#destinations'
+      resources :spots do
+        collection do
+          post :update_positions
+        end
+      end
+    end
     resources :schedules
     resources :hotels
     resources :locations

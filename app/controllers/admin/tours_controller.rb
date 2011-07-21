@@ -1,10 +1,14 @@
 class Admin::ToursController < Admin::ResourceController
   
+  def destinations
+    @tour = Tour.find(params[:tour_id])
+  end
+  
   private
 	def collection
     return @collection if @collection.present?
     
-    pagination_options = {:include   => {:variants => [:images, :option_values]},
+    pagination_options = {
                             :per_page  => Spree::Config[:admin_products_per_page],
                             :page      => params[:page]}
                             

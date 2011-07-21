@@ -4,9 +4,12 @@ $(function(){
 	$('#edit_div').dialog({ autoOpen: false, width: 600});
 });
 </script>
+<style type="text/css" >
+	.deleted {font-style:italic;color:#666;text-decoration:line-through;}
+</style>
 <% end %>
 <%= render :partial => 'admin/shared/product_sub_menu' %>
-
+<h1>Destination Photos</h1>
 <div class="toolbar">
   <ul class="actions">
   	<li>
@@ -19,6 +22,7 @@ $(function(){
       <a href="destinations/new" class="button" data-remote="true" id="admin_edit_destination">
       	<span><img alt="Add" src="/images/admin/icons/add.png?1305355888"> New Destination</span></a>
     </li>
+    <li><a href='destinations/photos' class='button'><span><img alt="Photos" src="/images/admin/icons/pdf.png"> Photos</span></a></li>
   </ul>
   <br class="clear">
 </div>

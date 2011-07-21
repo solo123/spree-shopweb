@@ -1,0 +1,37 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_spot_link">
+      <a href="<%= new_admin_tour_spot_path %>" class="button" data-remote="true" id="admin_new_spot">
+      	<span><img alt="Add" src="/images/admin/icons/add.png"> New Spot</span></a>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= "#{@tour.title}/#{@tour.title_cn}" %></h1>
+<%= link_to 'Back to tour list', '../tours' %>
+
+<div id='new_spot'></div>
+<div id="edit_div"></div>
+
+<% @collection.each do |sp| %>
+	<div>
+		<div style='border:solid 1px #d3bd7e'>Day <%= sp.visit_day %> - (<%= sp.visit_order %>) | <b><%= "Destination: #{sp.destination.title} (id:#{sp.destination_id})" if sp.destination %></b></div>
+		<div>
+			<%= image_tag sp.destination.photo.attachment.url(:small) if sp.destination && sp.destination.photo %>
+		</div>
+		<div>
+			<%= link_to image_tag('/images/admin/icons/edit.png') + 'Edit', edit_admin_tour_spot_path(@tour, sp), :remote => true   %>
+		</div>
+	</div>  
+<% end %>
+
+<% content_for :head do %>
+<script type="text/javascript">
+$(function(){
+	$('#edit_div').dialog({ autoOpen: false, width: 600});
+});
+</script>
+<% end %>
