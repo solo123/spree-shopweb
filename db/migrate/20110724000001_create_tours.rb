@@ -1,10 +1,14 @@
-class CreateDestinations < ActiveRecord::Migration
+class CreateTours < ActiveRecord::Migration
+  def self.connection
+    InfosDb.connection
+  end
   def self.up
     create_table :destinations do |t|
-    	t.integer :photo_id
     	t.string :title
     	t.string :title_cn
     	t.integer :location_id
+      t.string :title_photo
+      t.string :photoset
     	t.integer :status
     	t.timestamps
     end
@@ -20,15 +24,6 @@ class CreateDestinations < ActiveRecord::Migration
     	t.string :abbr
     	t.string :title
     	t.string :title_cn
-    end
-    create_table :photos do |t|
-    	t.string :ref_type
-    	t.integer :ref_id
-    	t.integer :show_order
-    	t.string :title
-    	t.string :title_cn
-    	t.integer :status
-    	t.timestamps
     end
     create_table :tours do |t|
     	t.string :title
@@ -48,11 +43,11 @@ class CreateDestinations < ActiveRecord::Migration
     	t.integer :status, :default => 0
     	t.timestamps
     end
-    create_table :destinations_tours, :id => false do |t|
+    create_table :tour_routes, :id => false do |t|
     	t.integer :tour_id
     	t.integer :destination_id
-    	t.integer :visit_order
     	t.integer :visit_day
+      t.integer :visit_order
     	t.integer :status, :default => 0
     	t.integer :edited_by, :default => 0
     	t.timestamps
@@ -80,27 +75,7 @@ class CreateDestinations < ActiveRecord::Migration
     	t.integer :created_by, :default => 0
     	t.timestamps
     end
-    create_table :hotels do |t|
-    	t.integer :icon_id
-    	t.string :title
-    	t.string :title_cn
-    	t.integer :star_rated
-    	t.decimal :price, :precision => 8, :scale => 2
-    	t.string :contact_info
-    	t.string :remark
-    	t.integer :status, :default => 0
-    	t.timestamps
-    end
-    create_table :hotels_schedules, :id => false do |t|
-    	t.integer :hotel_id
-    	t.integer :schedule_id
-    	t.integer :night
-    end
-    create_table :hotels_tours, :id => false do |t|
-    	t.integer :hotel_id
-    	t.integer :tour_id
-    	t.integer :night
-    end
+
     
   end
 
@@ -108,12 +83,8 @@ class CreateDestinations < ActiveRecord::Migration
     drop_table :destinations
     drop_table :descriptions
     drop_table :locations
-    drop_table :photos
     drop_table :tours
-    drop_table :destinations_tours
+    drop_table :tour_routes
     drop_table :schedules
-    drop_table :hotels
-    drop_table :hotels_schedules
-    drop_table :hotels_tours
   end
 end

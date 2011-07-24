@@ -5,6 +5,5 @@ class DestinationsController < Spree::BaseController
   def show
     @destination = Destination.find(params[:id])
     @related_tours = []
-    @photos = @destination.photos
   end
 end
