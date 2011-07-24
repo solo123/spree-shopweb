@@ -1,2 +1,2 @@
-class Employee < ActiveRecord::Base
+class Employee < InfosDb
 end

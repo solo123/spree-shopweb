@@ -1,2 +1,2 @@
-class Schedule < ActiveRecord::Base
+class Schedule < InfosDb
 end

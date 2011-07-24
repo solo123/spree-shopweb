@@ -1,4 +1,4 @@
-class Destination < InfoDb
+class Destination < InfosDb
   has_one :description, :as => :ref, :dependent => :destroy
   accepts_nested_attributes_for :description, :allow_destroy => true
   
