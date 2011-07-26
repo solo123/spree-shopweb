@@ -19,8 +19,8 @@
 <% @collection.each do |sp| %>
 	<div>
 		<div style='border:solid 1px #d3bd7e'>Day <%= sp.visit_day %> - (<%= sp.visit_order %>) | <b><%= "Destination: #{sp.destination.title} (id:#{sp.destination_id})" if sp.destination %></b></div>
-		<div>
-			<%= image_tag sp.destination.photo.attachment.url(:small) if sp.destination && sp.destination.photo %>
+		<div style='width:75px;height:75px;border:solid 1px #ccc;padding:4px;'>
+			<%= image_tag sp.destination.title_photo if sp.destination && sp.destination.title_photo %>
 		</div>
 		<div>
 			<%= link_to image_tag('/images/admin/icons/edit.png') + 'Edit', edit_admin_tour_spot_path(@tour, sp), :remote => true   %>

@@ -43,7 +43,7 @@ class CreateTours < ActiveRecord::Migration
     	t.integer :status, :default => 0
     	t.timestamps
     end
-    create_table :tour_routes, :id => false do |t|
+    create_table :tour_routes do |t|
     	t.integer :tour_id
     	t.integer :destination_id
     	t.integer :visit_day
