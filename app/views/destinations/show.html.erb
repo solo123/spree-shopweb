@@ -3,17 +3,16 @@
 	<%= stylesheet_link_tag '/javascripts/flickr/fleeckr.css', '/javascripts/flickr/colorbox.css' %>
 	<%= javascript_include_tag 'flickr/jquery.fleeckr.js', 'flickr/jquery.colorbox-min.js' %>
 
-<% if @destination.photoset %>
+<% if @destination.photo && @destination.photo.photoset %>
 <script type="text/javascript"> 
 $(function(){
 	$("#flickr").jfleeckr({
 		apikey: '<%= Spree::Config[:flickr_apikey] %>',
-		extra: 'photoset_id=<%= @destination.photoset %>',
+		extra: 'photoset_id=<%= @destination.photo.photoset %>',
 		method: 'flickr.photosets.getPhotos'
 	}, function(data){
 		$('#flickr a').colorbox({transition:"fade", width:"75%", height:"80%"});
 	});
-	
 });
 </script>
 <% end %>
@@ -31,13 +30,14 @@ $(function(){
 
 <%= render 'related_tours' %>
 <h2><%= @destination.title %></h2>
-<%#= image_tag @destination.photo.attachment.url(:small) if @destination.photo %>
-
-<div id="photo_primary" style="border:solid 1px #ccc;width:75px;height:75px;margin:8px;margin-right:16px;padding:4px;float:left;"></div>
-<div style="font-size:1em;line-height: 1.62;margin-bottom:12px;">
-	<%=h @destination.description.en %>
+<div id="photo_dest">
+	<%#= image_tag @destination.photo.attachment.url(:small) if @destination.photo %>
+	<div id="photo_primary" style="width:240px;height:180px;margin-right:16px;padding:3px;float:left;"></div>
+	<div style="font-size:1em;line-height: 1.62;margin-bottom:12px;">
+		<%=h @destination.description.en %>
+	</div>
+	<div class="clear"></div>
 </div>
-
 
 	<div id="flickr"></div> 
 

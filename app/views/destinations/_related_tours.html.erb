@@ -1,6 +1,6 @@
 <ul class="related-tours">
   <h2>Related tours:</h2>
-  <% @related_tours.each do |t| %>
-  <li><%= link_to t.name, t %></li>
+  <% @related_tours.each do |tour| %>
+  <li><%= link_to tour.title, tour %></li>
   <% end %>
 </ul>

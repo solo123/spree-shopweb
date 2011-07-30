@@ -1,46 +1,13 @@
-<% @destination.build_description if !@destination.description %>
+<% 
+	@destination.build_description if !@destination.description
+%>
 <%= form_for([:admin, @destination], :remote => true) do |f| %>
-	<div class="yui-g">
-		<div class="yui-u first">
-	  <%= f.field_container :title do %>
-	    <%= f.label :title %><br />
-	    <%= f.text_field :title %>
-	  <% end %>
-  	</div>
-  	<div class="yui-u">
-	  <%= f.field_container :title_cn do %>
-	    <%= f.label :title_cn %><br />
-	    <%= f.text_field :title_cn %>
-	  <% end %>
-  	</div>
-  </div>
 
-  <%= f.fields_for :description do |desc| %>
-  <div class="yui-g">
-  	<div class="yui-u first">
-  	<%= f.field_container :en do %>
-  		<%= desc.label :en %><br />
-  		<%= desc.text_area :en, :cols => '28' %>
-  	<% end %>
-  	</div>
-  	<div class="yui-u">
-  	<%= f.field_container :cn do %>
-  		<%= desc.label :cn %><br />
-  		<%= desc.text_area :cn, :cols => '28' %>
-  	<% end %>
-  	</div>
-  </div>
-  <% end %>
-  
-  <div class="yui-g">
-		<%= render :partial => 'location', :locals => { :f => f } %>
-  </div>
-  
-  
-  <%= f.field_container :status do %>
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
-  <% end %>
+	<%= render :partial => 'admin/shared/title', :locals => {:f => f} %>
+	<%= render :partial => 'admin/shared/description', :locals => {:f => f} %>
+	<%= render :partial => 'location', :locals => { :f => f } %>
+	<%= render :partial => 'admin/shared/status', :locals => {:f => f} %>  
+
   <div class="actions">
     <%= f.submit %>
   </div>

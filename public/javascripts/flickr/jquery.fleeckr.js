@@ -43,7 +43,7 @@
 							item['image'] = item['url_s'].replace('_m', '');
 							item['image_b'] = item['url_s'].replace('_m', '_b');
 							if (item.isprimary==1 && $(settings.primay)){
-								$(settings.primary).html('<img src="'+ item['image_s'] +'" alt="'+ item.title +'" />');
+								$(settings.primary).html('<img style="border:solid 1px #ccc;padding:3px;" src="'+ item['image_m'] +'" alt="'+ item.title +'" />');
 							}
 							if(settings.useTemplate){
 								var template = settings.itemTemplate;

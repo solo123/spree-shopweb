@@ -9,13 +9,26 @@ class Admin::DestinationsController < Admin::ResourceController
     if params[:photo]
       params[:photo].each do |para|
         d = Destination.find(para[:dest_id])
-        d.photoset = para[:photo_id]
-        s = flickr.photosets.getInfo(:photoset_id => d.photoset)
+        d.build_photo if !d.photo
+        ph = d.photo
+        ph.photoset = para[:photo_id]
+        s = flickr.photosets.getInfo(:photoset_id => ph.photoset)
         i = flickr.photos.getInfo(:photo_id => s.primary)
-        d.title_photo = FlickRaw.url_s(i)
+        ph.photo_s = FlickRaw.url_s(i)
+        ph.photo_t = FlickRaw.url_t(i)
+        ph.photo_m = FlickRaw.url_m(i)
         d.save!
       end
     end
+	end
+	def photos_reset
+	  Destination.where('photoset is not null').each do |d|
+	    if d.photo
+  	    d.photo.photoset = nil
+  	    d.save
+  	  end
+	  end
+	  redirect_to :action => :photos
 	end
 	
   private

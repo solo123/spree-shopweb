@@ -1,6 +1,8 @@
 class Destination < InfosDb
-  has_one :description, :as => :ref, :dependent => :destroy
+  has_one :description, :as => :desc_data, :dependent => :destroy
   accepts_nested_attributes_for :description, :allow_destroy => true
+  
+  has_one :photo, :as => :photo_data, :dependent => :destroy
   
   has_and_belongs_to_many :tours
   

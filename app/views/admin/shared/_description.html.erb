@@ -1,0 +1,16 @@
+  <%= f.fields_for :description do |desc| %>
+  <div class="yui-g">
+  	<div class="yui-u first">
+  	<%= f.field_container :en do %>
+  		<%= desc.label :en %><br />
+  		<%= desc.text_area :en, :cols => '28' %>
+  	<% end %>
+  	</div>
+  	<div class="yui-u">
+  	<%= f.field_container :cn do %>
+  		<%= desc.label :cn %><br />
+  		<%= desc.text_area :cn, :cols => '28' %>
+  	<% end %>
+  	</div>
+  </div>
+  <% end %>

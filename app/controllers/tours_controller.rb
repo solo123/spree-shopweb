@@ -21,7 +21,6 @@ class ToursController < Spree::BaseController
       return
     end
     @tour = Tour.find(params[:id])
-    @tour_points = TourPoint.where("tour_id=#{@tour.id}").order("visit_day,visit_order")
   end
 
 end

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   
   namespace :admin do
     match 'destinations/photos' => 'destinations#photos'
+    match 'destinations/photos_reset' => 'destinations#photos_reset'
     resources :destinations
     resources :pages
     resources :tours do

@@ -1,5 +1,8 @@
 class Page < InfosDb
+  has_one :description, :as => :desc_data, :dependent => :destroy
+  accepts_nested_attributes_for :description, :allow_destroy => true
+  
 	def deleted?
-    is_active && is_active == 1
+    status && status == 1
   end
 end

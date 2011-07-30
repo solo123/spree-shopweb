@@ -260,7 +260,7 @@ legend {
 }
 body {
   margin-top: 0px;
-  background: #ffffff url(../images/tile-slider.png) top left repeat-x;
+  background: #f0f0f0 url(../images/tile-slider.png) top left repeat-x;
 }
 .container_bg { width: 100%; }
 div.left {

@@ -2,7 +2,8 @@
 <style type="text/css">
 #tour_detail { width:48%; padding-right:8px; border-right:solid 1px #ccc; float:left; margin-bottom:6px; }
 #tour_dests {clear:both; margin-top:10px;}
-#tour_dests .pic {width: 150px; float:left;cursor:pointer;}
+#tour_dests .pic {width: 150px; height:100px; float:left;cursor:pointer;border:solid 1px #ccc;text-align: center;}
+#tour_dests .pic img {width:148px;height:98px;padding-top:1px;}
 #tour_dests .dest {padding-left:160px;}
 #tour_dests .clear {clear:both;margin-top:10px;}
 #tour_dests .day {margin-top:8px;margin-bottom:8px;background-color:#003300; color:#E8FCE8; font-size:120%; font-weight:bold; text-align:center;}
@@ -17,7 +18,7 @@
 
     <div id="tour_detail">
         <div class="head">
-            <h2><%=h @tour.name %></h2>
+            <h2><%=h @tour.title %></h2>
         </div>
         <%=h @tour.description.en %>
     </div>
@@ -35,25 +36,25 @@
         <%
         cd = 0
         image_path = ''
-        @tour_points.each do |dt|
-          dest = Destination.find(dt.destination_id)
-        if (dt["tour_day"] != cd)
-            cd = dt["tour_day"] %>
+        @tour.spots.each do |spot|
+        if (spot.visit_day != cd)
+            cd = spot.visit_day %>
             <div class="day">Day <%= cd %></div>
      <% end %>
 
         <div>
           <div class="pic">
-            <img onclick="location='/destinations/<%= dt.destination_id %>'" src="<%= IMAGE_ROOT %>images/upload/destinationPics/DestTn_<%= dest.title_pic %>.jpg" alt="" />
+          	<%= image_tag spot.destination.title_photo if spot.destination.title_photo %>
           </div>
           <div class="dest">
-              <%= link_to dest.title, dest %>
-              <%=h dest.description.en %>
+              <%= link_to spot.destination.title, spot.destination %>
+              <%=h spot.description.en %>
           </div>
           <div class="clear"></div>
         </div>
 
     <% end %>
+    <div class="clear"></div>
     </div>
 
     <p>

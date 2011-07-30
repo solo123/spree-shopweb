@@ -10,6 +10,7 @@ $(function(){
 });
 </script>
 <% end %>
+
 <%= render :partial => 'admin/shared/product_sub_menu' %>
 <h1>Destinations Photos</h1>
 
@@ -30,19 +31,23 @@ $(function(){
 	<% dest = Destination.where(['title like ?', ps.title + '%']).first %>
 	<tr>
 		<td>
-			<% if dest && dest.photoset != ps.id %>
-				<%= check_box_tag '', true, true %>
-				<%= hidden_field_tag "photo[][photo_id]", ps.id %>
-				<%= hidden_field_tag "photo[][dest_id]", dest.id %>
+			<% if dest %>
+				<% dest.build_photo if !dest.photo %>
+				<% if dest.photo.photoset != ps.id %>
+					<%= check_box_tag '', true, true %>
+					<%= hidden_field_tag "photo[][photo_id]", ps.id %>
+					<%= hidden_field_tag "photo[][dest_id]", dest.id %>
+				<% end %>
 			<% end %>
 		</td>
 		<td><%= ps.title %></td>
 		<td><%= ps.photos %>张</td>
 		<td><%= dest.title if dest %></td>
 		<td><%= dest.id if dest %></td>
-	</div>
+	</tr>
 	<% end %>
 	</tbody>
 </table>
 	<%= submit_tag 'Save' %>
+	<%= link_to 'Reset all', 'photos_reset' %>
 <% end %>

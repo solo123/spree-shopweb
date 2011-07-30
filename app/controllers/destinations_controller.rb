@@ -4,6 +4,9 @@ class DestinationsController < Spree::BaseController
   end
   def show
     @destination = Destination.find(params[:id])
-    @related_tours = []
+    spots = Spot.select('DISTINCT tour_id').where(:destination_id => @destination.id)
+    tours = []
+    spots.each {|spot| tours << spot.tour_id }
+    @related_tours = Tour.find(tours)
   end
 end
