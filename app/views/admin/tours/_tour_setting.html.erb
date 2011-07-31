@@ -1,0 +1,25 @@
+<% @tour.build_tour_setting if !@tour.tour_setting %>
+<%= f.fields_for :tour_setting do |s| %>
+  <div class="yui-g">
+		<div class="yui-u first">
+	  <%= f.field_container :weekly do %>
+	  	<%= s.label :weekly %><br />
+	  	<%= s.text_field :weekly %>
+	  <% end %>
+	  <%= f.field_container :is_auto_gen do %>
+	  	<%= s.label :is_auto_gen %><br />
+	  	<%= s.text_field :is_auto_gen %>
+	  <% end %>
+	  </div>
+	  <div class='yui-u'>
+	  <%= f.field_container :has_seat_table do %>
+	  	<%= s.label :has_seat_table %><br />
+	  	<%= s.text_field :has_seat_table %>
+	  <% end %>
+	  <%= f.field_container :is_float_price do %>
+	  	<%= s.label :is_float_price %><br />
+	  	<%= s.text_field :is_float_price %>
+	  <% end %>
+		</div>
+	</div>
+<% end %>

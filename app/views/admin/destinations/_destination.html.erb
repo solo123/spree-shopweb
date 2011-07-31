@@ -6,6 +6,7 @@
 	<td><%= destination.updated_at.localtime if destination.updated_at %></td>
 	<td><%= destination.status_text %></td>
 	<td>
-		<%= link_to 'Edit', edit_admin_destination_path(destination), :remote => true %>
+		<%= link_to 'Edit', edit_admin_destination_path(destination), :remote => true %> |
+		<%= link_to_delete destination %>
 	</td>
 </tr>

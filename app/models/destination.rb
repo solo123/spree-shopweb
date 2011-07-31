@@ -3,9 +3,6 @@ class Destination < InfosDb
   accepts_nested_attributes_for :description, :allow_destroy => true
   
   has_one :photo, :as => :photo_data, :dependent => :destroy
-  
-  has_and_belongs_to_many :tours
-  
   def status_text
     if self.status && self.status > 0
       'show'

@@ -1,95 +1,24 @@
 <%= form_for([:admin, @tour], :remote => true) do |f| %>
-	<div class="yui-g">
-		<div class="yui-u first">
-	  <%= f.field_container :title do %>
-	    <%= f.label :title %><br />
-	    <%= f.text_field :title %>
-	  <% end %>
-  	</div>
-  	<div class="yui-u">
-	  <%= f.field_container :title_cn do %>
-	    <%= f.label :title_cn %><br />
-	    <%= f.text_field :title_cn %>
-	  <% end %>
-  	</div>
-  </div>
-  
+	<%= render :partial => 'admin/shared/title', :locals => {:f => f} %>
   <div class="yui-g">
-		<div class="yui-u first">
-	  <%= f.field_container :days do %>
-	  	<%= f.label :days %><br />
-	  	<%= f.text_field :days %>
-	  <% end %>
-	  <%= f.field_container :weekly do %>
-	  	<%= f.label :weekly %><br />
-	  	<%= f.text_field :weekly %>
-	  <% end %>
-	 	</div>
-  	<div class='yui-u'>
-	  <%= f.field_container :is_auto_gen do %>
-	  	<%= f.label :is_auto_gen %><br />
-	  	<%= f.text_field :is_auto_gen %>
-	  <% end %>
-	  <%= f.field_container :has_seat_table do %>
-	  	<%= f.label :has_seat_table %><br />
-	  	<%= f.text_field :has_seat_table %>
-	  <% end %>
-	  
-
-		</div>
-	</div>
-
-  <div class="yui-g">
-		<div class="yui-u first">
-	  <%= f.field_container :price_adult do %>
-	  	<%= f.label :price_adult %><br />
-	  	<%= f.text_field :price_adult %>
-	  <% end %>
-	  
-	  <%= f.field_container :price_child do %>
-	  	<%= f.label :price_child %><br />
-	  	<%= f.text_field :price_child %>
-	  <% end %>
+  	<div class='yui-u first'>
 	  <%= f.field_container :tour_type do %>
 	  	<%= f.label :tour_type %><br />
 	  	<%= f.text_field :tour_type %>
 	  <% end %>
-
-  <%= f.field_container :status do %>
-  	<%= f.label :status %><br />
-  	<%= f.text_field :status %>
 	  </div>
-		
-		<div class='yui-u'>  
-	  <%= f.field_container :is_float_price do %>
-	  	<%= f.label :is_float_price %><br />
-	  	<%= f.text_field :is_float_price %>
+	  <div class='yui-u'>
+	  <%= f.field_container :days do %>
+	  	<%= f.label :days %><br />
+	  	<%= f.text_field :days %>
 	  <% end %>
-
-	  <%= f.field_container :price1 do %>
-	  	<%= f.label :price1 %><br />
-	  	<%= f.text_field :price1 %>
-	  <% end %>
-	  
-	  <%= f.field_container :price2 do %>
-	  	<%= f.label :price2 %><br />
-	  	<%= f.text_field :price2 %>
-	  <% end %>
-	  
-	  <%= f.field_container :price3 do %>
-	  	<%= f.label :price3 %><br />
-	  	<%= f.text_field :price3 %>
-	  <% end %>
-		</div>
+	  </div>
 	</div>
-	
-  <div class="yui-g">
+	<%= render :partial => 'tour_setting', :locals => {:f => f} %>
+	<%= render :partial => 'tour_price', :locals => {:f => f} %>
+	<%= render :partial => 'admin/shared/status', :locals => {:f => f} %>	
 
-  <% end %>
-	</div>
-	
   <div class="actions">
     <%= f.submit %>
   </div>
-  <br />
 <% end %>
