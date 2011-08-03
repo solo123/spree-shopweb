@@ -2,8 +2,11 @@
 	<td><%= tour.id %></td>
 	<td><%= tour.title %><br /><%= tour.title_cn %></td>
 	<td><%= tour.tour_type %></td>
-	<td><%= tour.created_at.localtime if tour.created_at %></td>
-	<td><%= tour.updated_at.localtime if tour.updated_at %></td>
+	<td><%= tour.days %></td>
+	<td><%= tour.tour_setting.weekly if tour.tour_setting %></td>
+	<td><%= "#{tour.tour_price.price_adult} / #{tour.tour_price.price_child}" if tour.tour_price %></td>
+	<td><%= tour.tour_setting.available_days if tour.tour_setting %></td>
+	<td><%= tour.tour_setting.last_schedule_date if tour.tour_setting %></td>
 	<td><%= tour.status %></td>
 	<td>
 		<%= link_to 'Route', admin_tour_spots_path(tour) %> |

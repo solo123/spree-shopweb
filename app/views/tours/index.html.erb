@@ -21,7 +21,7 @@
                 <%=t.title %> <%= day_night_text(t.days) %>
             </a>
       </div>
-      <div class="price">Adult:$<%=t.price_adult%> Child:$<%=t.price_child%></div>
+      <div class="price">Adult:$<%=t.tour_price.price_adult if t.tour_price%> Child:$<%=t.tour_price.price_child if t.tour_price%></div>
     </div>
   </div>
   <% end %>

@@ -6,7 +6,7 @@ class CreateDestinations < ActiveRecord::Migration
     create_table :destinations do |t|
     	t.string :title
     	t.string :title_cn
-    	t.integer :location_id
+    	t.integer :city_id
     	t.integer :status
     	t.timestamps
     end
@@ -17,11 +17,11 @@ class CreateDestinations < ActiveRecord::Migration
     	t.text :cn
     	t.timestamps
     end
-    create_table :locations do |t|
-      t.integer :parent_id
-    	t.string :abbr
-    	t.string :title
-    	t.string :title_cn
+    create_table :cities do |t|
+      t.string :city
+      t.string :state
+      t.string :country
+      t.integer :status, :default => 0
     end
     create_table :photos do |t|
       t.string :photo_data_type

@@ -17,7 +17,6 @@ class CreateTours < ActiveRecord::Migration
     	t.integer :visit_day
       t.integer :visit_order
     	t.integer :status, :default => 0
-    	t.integer :edited_by, :default => 0
     	t.timestamps
     end
     create_table :tour_prices do |t|

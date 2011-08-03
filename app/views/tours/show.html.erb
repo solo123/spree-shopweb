@@ -8,7 +8,6 @@
 #tour_dests .clear {clear:both;margin-top:10px;}
 #tour_dests .day {margin-top:8px;margin-bottom:8px;background-color:#003300; color:#E8FCE8; font-size:120%; font-weight:bold; text-align:center;}
 #tour_dests a {display:block;}
-
 #order{float:right;width:40%;}
 </style>
 <% end %>
@@ -44,7 +43,7 @@
 
         <div>
           <div class="pic">
-          	<%= image_tag spot.destination.title_photo if spot.destination.title_photo %>
+          	<%= image_tag spot.destination.photo.photo_m if spot.destination.photo %>
           </div>
           <div class="dest">
               <%= link_to spot.destination.title, spot.destination %>

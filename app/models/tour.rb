@@ -7,4 +7,6 @@ class Tour < InfosDb
   accepts_nested_attributes_for :tour_setting, :allow_destroy => true
   has_one :tour_price, :dependent => :destroy
   accepts_nested_attributes_for :tour_price, :allow_destroy => true
+  
+  has_many :schedules
 end
