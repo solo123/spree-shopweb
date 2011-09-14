@@ -2,14 +2,18 @@
 
 <div class='toolbar'>
   <ul class='actions'>
-    <li id="new_photo_link">
-      <%= button_link_to t("new_photo"), new_object_url, {:remote => true, :icon => 'add', :id => 'admin_new_photo'} %>
+  	<li>
+  		Last generate schedule at: <%= Spree::Config[:schedule_generated_date] %>
+  		&nbsp;&nbsp;
+  	</li>
+    <li id="generate_schedule_link">
+      <%= button_link_to t("generate_schedule"), 'schedules/generate', { :icon => 'add', :id => 'generate_schedule'} %>
     </li>
   </ul>
   <br class='clear' />
 </div>
 
-<h1><%= "#{t("actions.listing")} #{t("photos")}" %></h1>
+<h1><%= "#{t("actions.listing")} #{t("schedules")}" %></h1>
 
 <div id="new_photo"></div>
 

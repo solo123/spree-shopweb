@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         end
       end
     end
+    match 'schedules/generate(/:op)' => 'schedules#generate'
     resources :schedules
     resources :hotels
     resources :locations
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
     resources :employees
     resources :vehicles
     resources :user_infos
+    
+    resources :gen_schedules, :only => :index
     
   end
 end

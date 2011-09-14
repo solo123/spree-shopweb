@@ -21,6 +21,11 @@
   	<%= text_field_tag('preferences[flickr_apikey]', Spree::Config[:flickr_apikey]) %>
   </p>
   <p>
+  	<label><%= t("booking_range")%></label><br />
+  	<%= text_field_tag('preferences[booking_range]', Spree::Config[:booking_range]) %>
+  </p>
+  
+  <p>
     <label>
 	  <input name="preferences[allow_ssl_in_production]" type="hidden" value="0" />
       <%= check_box_tag('preferences[allow_ssl_in_production]', "1", Spree::Config[:allow_ssl_in_production]) %>

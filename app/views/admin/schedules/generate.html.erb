@@ -1,0 +1,30 @@
+<h1>Gen schedules</h1>
+
+<% if !@gen_schedule %>
+<div class='toolbar'>
+  <ul class='actions'>
+  	<li>
+  		Last generate schedule at: <%= Spree::Config[:schedule_generated_date] %>
+  		&nbsp;&nbsp;
+  	</li>
+    <li id="generate_schedule_link">
+      <%= button_link_to t("generate_schedule"), 'generate/do', { :icon => 'add', :id => 'generate_schedule'} %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+<% end %>
+
+<ul>
+<% @messages.each do |msg| %>
+	<li><%= msg[0] %></li>
+	<li><%= msg[1] %></li>
+	<li>
+		<ul>
+			<% msg[2].each do |d| %>
+			<li><%= d %></li>
+			<% end %>
+		</ul>
+	</li>
+<% end %>
+</ul>

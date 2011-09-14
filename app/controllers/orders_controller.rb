@@ -68,4 +68,8 @@ class OrdersController < Spree::BaseController
   def accurate_title
     I18n.t(:shopping_cart)
   end
+  
+  def weborder
+    
+  end
 end

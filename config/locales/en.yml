@@ -8,3 +8,5 @@ en:
   spots: spots
   spot: spot
   new_spot: New Spot
+  schedules: Schedules
+  generate_schedule: Gen Schedule
