@@ -8,5 +8,5 @@ class Tour < InfosDb
   has_one :tour_price, :dependent => :destroy
   accepts_nested_attributes_for :tour_price, :allow_destroy => true
   
-  has_many :schedules
+  has_many :schedules, :conditions => ['departure_date > ?', Date.today + 1]
 end

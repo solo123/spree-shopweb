@@ -69,7 +69,7 @@ class OrdersController < Spree::BaseController
     I18n.t(:shopping_cart)
   end
   
-  def weborder
-    
+  def new
+    @tour = Tour.find(params[:tour_id])
   end
 end

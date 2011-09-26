@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :destinations
   resources :tours
   resources :pages
+  resources :tour_orders
   match 'home(/:action)' => 'home'
   
   
@@ -30,6 +31,6 @@ Rails.application.routes.draw do
     resources :user_infos
     
     resources :gen_schedules, :only => :index
-    
   end
+
 end

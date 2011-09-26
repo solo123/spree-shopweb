@@ -22,14 +22,7 @@
         <%=h @tour.description.en %>
     </div>
   <div id="order">
-    <%= form_for :order, :url => populate_orders_url do |f| %>
-    <input type="hidden" name="tours[<%= @tour.id %>]" value="1" />
-    Order Now!<br />
-    
-    <button type='submit' class='large primary'>
-      <%= image_tag('/images/add-to-cart.png') + t('add_to_cart') %>
-    </button>
-    <% end %>
+      <a href='/tour_orders/new?tour=<%= @tour.id %>'>Order now</a>
   </div>
   <div class="clear"></div>
     <div id="tour_dests">

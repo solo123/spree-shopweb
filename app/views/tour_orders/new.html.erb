@@ -1,0 +1,82 @@
+<%= content_for :head do %>
+<%= javascript_include_tag 'jqueryui/jquery-ui-1.8.13.custom.min.js' %>
+<%= stylesheet_link_tag '/javascripts/jqueryui/jquery-ui-1.8.13.custom.css' %>
+
+<script type='text/javascript'>
+var room_count = 100;
+
+function add_room(){
+	room_count++;
+	var nm = 'shop_order[order_items_attributes]['+ room_count + ']';
+	var item = "<div>Room #: Adult: <input name='" + nm + "[num_adult]' type='text' size='2' /> Child: <input name='" + nm + "[num_child]' type='text' size='2' /> <a onclick='rm_room(this);'>remove</a><br /></div>";
+	item = $(item);
+//	  item.find('a').click(function(){ alert($(this).parent().text()); });
+	$('#rooms').append(item);
+	item.show('slide', {direction: 'up'}, 500, null);
+}
+var current_node = null;	
+	function rm_room(nd){
+		var node = $(nd).parent();
+		node.find('input').val('');
+		node.hide('slide',{direction: 'up'}, 500, null);
+	}
+	
+$(function(){
+	$('a.add_room').click(function(){
+		add_room();
+	});
+	
+	var vds = '<%= @datelist %>';
+	
+	$('#departure').datepicker({
+		numberOfMonths: 3,
+		showButtonPanel: false,
+		minDate: 0,
+		maxDate: <%= @max_date %>,
+		beforeShowDay: function(date){
+			var m = date.getMonth() + 1;
+			if (m < 10)
+				m = "0" + m;
+			else
+				m = '' + m;
+			var s = '[' + date.getFullYear() + '.' + m + '.' + date.getDate() + ']';
+			if (vds.indexOf(s)<0)
+				return [0, '', null];
+			else
+				return [1, '', s];	
+		}
+	});
+});
+</script>
+<% end %>
+
+<h1>New Order</h1>
+
+<%= form_for @order, :url => tour_orders_url do |f| %>
+	<p>
+		[<b><%= @tour.id %></b>]
+		<%= @tour.title %>
+	</p>>
+	
+	<p>
+		<%= f.select :schedule_id, @tour.schedules.collect{|s| [s.departure_date.strftime('%a, %b %d, %Y'), s.id]} %>
+	</p>
+	
+	<p>
+		Departure at: <input type='text' id='departure' />
+	</p>
+	
+	<div id='rooms'>
+    	<%= f.fields_for :order_items do |item| %>
+				<%= render :partial => 'room', :locals => {:item => item} %>
+    	<% end %>
+  </div>
+	<p>
+		<%= link_to "Add room", 'javascript:add_room()' %>
+	</p>
+	
+	<p>
+		<%= f.submit 'submit' %>
+	</p>
+
+<% end %>
