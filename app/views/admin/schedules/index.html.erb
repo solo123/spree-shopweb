@@ -1,55 +1,61 @@
-<%= render :partial => 'admin/shared/product_sub_menu' %>
+<%= content_for :head do %>
+<%= javascript_include_tag 'jqueryui/jquery-ui-1.8.13.custom.min.js' %>
+<%= stylesheet_link_tag '/javascripts/jqueryui/jquery-ui-1.8.13.custom.css' %>
+<script type='text/javascript'>
+$(function(){
+	
+	$('#search_departure_date_greater_than_or_equal_to').datepicker({
+		showButtonPanel: true,
+		dateFormat: 'yy-mm-dd'
+	});
+	$('#search_departure_date_less_than_or_equal_to').datepicker({
+		showButtonPanel: true,
+		dateFormat: 'yy-mm-dd'
+	});	
+});
+</script>
+<% end %>
 
+<%= render :partial => 'admin/shared/schedule_sub_menu' %>
+<%= render :partial => 'admin/shared/quick_toolbar' %>
 <div class='toolbar'>
-  <ul class='actions'>
-  	<li>
-  		Last generate schedule at: <%= Spree::Config[:schedule_generated_date] %>
-  		&nbsp;&nbsp;
-  	</li>
-    <li id="generate_schedule_link">
-      <%= button_link_to t("generate_schedule"), 'schedules/generate', { :icon => 'add', :id => 'generate_schedule'} %>
-    </li>
-  </ul>
+    <%= form_for [:admin, @search] do |f| %>
+    	Departure 
+    	from: <%= f.text_field :departure_date_greater_than_or_equal_to, :size => 7 %> 
+    	to: <%= f.text_field :departure_date_less_than_or_equal_to, :size => 7 %>
+    	<%= button t('search') %>
+    	<%= button_link_to t("generate_schedule"), 'schedules/generate', { :icon => 'add', :id => 'generate_schedule'} %>
+    <% end %>  
   <br class='clear' />
 </div>
 
-<h1><%= "#{t("actions.listing")} #{t("schedules")}" %></h1>
 
 <div id="new_photo"></div>
 
 <table class="index" id='listing_photos'>
   <tr>
-      <th><%= t("sku") %></th>
-      <th><%= t("abc") %></th>
-      <th><%= t("ddd") %></th>
-    <th>
-    </th>
+      <th><%= t("schedule_id") %></th>
+      <th><%= t("tour") %></th>
+      <th><%= t("days") %></th>
+      <th>Price</th>
+      <th>Departure</th>
+      <th>Tour Guide</th>
+      <th>Driver</th>
+      <th>Status</th>
   </tr>
-<% @collection.each do |p| %>
-  <tr id="<%= dom_id p %>">
-      <td><%= p.id %></td>
-      <td><%= p.title %></td>
-    <td class="actions">
-        <%= link_to_edit p, :class => 'edit'   %>
-        &nbsp;
-        <%= link_to_clone p, :class => 'clone' %>
-        &nbsp;
-        <%= link_to_delete p  %>
-    </td>
+<% @collection.each do |s| %>
+  <tr id="<%= dom_id s %>" class='<%= cycle('row', 'alt-row') %>'>
+      <td style="font-weight:bold;text-align:center;text-decoration:underline;"><%= link_to s.id %></td>
+      <td><span class="tour-name"><%= s.tour.title_cn %></span><br /><%= s.tour.title %></td>
+      <td><%= s.tour.days %></td>
+      <td><%= s.schedule_price.price_adult if s.schedule_price %></td>
+      <td><%= s.departure_date %></td>
+      <td><%= s.schedule_assignment.tour_guide_id if s.schedule_assignment %></td>
+      <td><%= s.schedule_assignment.driver_id if s.schedule_assignment %></td>
+      <td><%= s.status %></td>
   </tr>
 <% end %>
 </table>
 <%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
 
-<% content_for :sidebar do %>
-    <%= form_for [:admin, @search] do |f| %>
-      <div class="box">
-        <h3><%= t(:search) %></h3>
-
-          <p class="form-buttons">
-            <%= button t("search") %>
-          </p>
-      </div>
-    <% end %>
-<% end %>
 

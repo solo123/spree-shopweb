@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     match 'destinations/photos_reset' => 'destinations#photos_reset'
     resources :destinations
     resources :pages
+    resources :shop_orders
     resources :tours do
       match 'destinations' => 'tours#destinations'
       resources :spots do
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
     resources :locations
     resources :companies
     resources :employees
+    resources :customers
     resources :vehicles
     resources :user_infos
     

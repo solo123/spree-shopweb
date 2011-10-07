@@ -1,0 +1,12 @@
+
+	<h2>Customer</h2>
+	<%= link_to 'edit', edit_admin_shop_order_path(@shop_order) + '?p=customer', :remote => true %>
+	<p>
+		Customer:
+		<%= @shop_order.customer_id %>
+		Name:
+		<% if @shop_order.customer_id == 0 %>
+		[by employee]
+		<% end %>
+		<%= @shop_order.customer_name %>
+	</p>

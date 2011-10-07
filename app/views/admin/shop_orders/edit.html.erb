@@ -1,0 +1,54 @@
+<h1>Edit order</h1>
+
+<%= form_for [:admin, @shop_order] do |f| %>
+
+<p>
+	Customer id:
+	<%= f.text_field :customer_id %>
+</p>
+<p>
+	Customer name:
+	<%= f.text_field :customer_name %>
+</p>
+
+<p>
+	Order number:
+	<%= f.text_field :order_number %>
+</p>
+<p>
+	Special instructions:
+	<%= f.text_field :special_instructions %>
+</p>
+<p>
+	Order type:
+	<%= f.text_field :order_type %>
+</p>
+<p>
+	Order related id:
+	<%= f.text_field :order_related_id %>
+</p>
+<p>
+	 Bill address id:
+	 <%= f.text_field :bill_address_id %>
+</p>
+
+<p>
+	State:
+	<%= f.text_field :state %>
+</p>
+<p>
+	Completed at:
+	<%= f.text_field :completed_at %>
+</p>
+<p>
+	Created_at:a
+	<%= @shop_order.created_at %>
+</p>
+<p>
+	Updated at:
+	<%= @shop_order.updated_at %>
+</p>
+<p>
+	<%= f.submit 'submit' %>
+</p>
+<% end %>

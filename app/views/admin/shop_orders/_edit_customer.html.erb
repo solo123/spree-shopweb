@@ -1,0 +1,12 @@
+<%= form_for( @shop_order, :url => admin_shop_order_path(@shop_order), :remote => true) do |f| %>
+  <div class="yui-g">
+	<%= f.field_container :customer_id do %>
+		<%= f.label :customer_id %>:
+		<%= f.text_field :customer_id %>  	
+	<% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

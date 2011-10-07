@@ -1,0 +1,40 @@
+<%= render :partial => 'admin/shared/user_sub_menu' %>
+<h1>Customers</h1>
+
+<div class='toolbar'>
+	<%= form_tag '', :method => :get do %>
+  <ul class='actions'>
+    <li id="new_photo_link">
+    	Search:
+    	<%= text_field_tag 'search_text', params['search_text'] %>
+    </li>
+    <li>
+    	<%= button t('search') %>
+    </li>
+  </ul>
+  
+  <% end %>
+  <br class='clear' />
+</div>
+
+<table class="index" id='customers'>
+  <tr>
+      <th><%= t("sku") %></th>
+      <th><%= t("abc") %></th>
+      <th><%= t("ddd") %></th>
+    <th>
+    </th>
+  </tr>
+<% @customers.each do |c| %>
+  <tr id="<%= dom_id c %>">
+      <td><%= c.id %></td>
+      <td><%= c.first_name %></td>
+    <td class="actions">
+        <%= link_to c, :class => 'edit'   %>
+        &nbsp;
+        <%= link_to c  %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>

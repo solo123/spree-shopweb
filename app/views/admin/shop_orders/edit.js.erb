@@ -1,0 +1,5 @@
+$("#form > form")
+	.replaceWith("<%= escape_javascript(render(:partial => "edit_customer"))%>");
+$('#edit_div')
+	.dialog('option', 'title', 'Customer (select)')
+	.dialog('open');

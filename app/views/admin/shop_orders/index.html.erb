@@ -1,0 +1,19 @@
+<h1>Orders</h1>
+
+<table class="index" id='listing_photos'>
+  <tr>
+      <th><%= t("order_id") %></th>
+      <th>Type</th>
+      <th>Related id</th>
+      <th><%= t("tour") %></th>
+      <th>Departure</th>
+      <th>Customer</th>
+      <th>Phone</th>
+      <th>Status</th>
+  </tr>
+<% @shop_orders.each do |order| %>
+	<%= render :partial => 'tour_order_line', :locals => {:order => order}  %>
+<% end %>
+</table>
+<%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
+

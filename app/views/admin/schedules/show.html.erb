@@ -1,0 +1,698 @@
+<%= content_for :head do %>
+<%= javascript_include_tag 'jqueryui/jquery-ui-1.8.13.custom.min.js' %>
+<%= stylesheet_link_tag '/javascripts/jqueryui/jquery-ui-1.8.13.custom.css' %>
+<script type='text/javascript'>
+$(function(){
+	
+	$('#search_departure_date_greater_than_or_equal_to').datepicker({
+		showButtonPanel: true,
+		dateFormat: 'yy-mm-dd'
+	});
+	$('#search_departure_date_less_than_or_equal_to').datepicker({
+		showButtonPanel: true,
+		dateFormat: 'yy-mm-dd'
+	});	
+});
+</script>
+<% end %>
+
+<%= render :partial => 'admin/shared/schedule_sub_menu' %>
+<%= render :partial => 'admin/shared/quick_toolbar' %>
+
+
+<%= render :partial => 'schedule_title' %>
+
+<div>
+    <table width="100%">
+        <tbody><tr>
+            <td>
+            <div class="listButtons">
+            <ul>
+        <li><input type="submit" name="ctl00$ContentPlaceHolder1$btnHold" value="Hold" onclick="return CheckSeats(msg_hold, '0');" id="ctl00_ContentPlaceHolder1_btnHold"></li><li><input type="submit" name="ctl00$ContentPlaceHolder1$btnOrder" value="Order" onclick="return CheckSeats(msg_neworder, '0');" id="ctl00_ContentPlaceHolder1_btnOrder"></li><li><input type="submit" name="ctl00$ContentPlaceHolder1$btnRelease" value="Release" onclick="return CheckSeats(msg_release, '123');" id="ctl00_ContentPlaceHolder1_btnRelease"></li><li><input type="button" value="Print" onclick="PrintSeats(48779)"></li>
+                <li><a onclick="ShowFee('')">Fee</a></li>
+            
+            </ul>
+            </div>
+            </td>
+            <td align="right">
+                <table width="380" border="0" cellpadding="4" cellspacing="0" style="border: solid 1px darkgreen;">
+                  <tbody><tr>
+                    <td align="center" nowrap="nowrap" class="edit_en">圖示:(<a href="ScheduleOrders.aspx">相关订单</a>)</td>
+                    <td align="center" nowrap="nowrap" class="edit_en"><span class="diagramExp" style="color:#339966;">g</span> Avilible</td>
+                    <td align="center" nowrap="nowrap" class="edit_en"><span class="diagramExp" style="color:#ffff80;">g</span> Hold</td>
+                    <td align="center" nowrap="nowrap" class="edit_en"><span class="diagramExp" style="color:#ff99cc;">g</span> Sold balance</td>
+                    <td align="center" nowrap="nowrap" class="edit_en"><span class="diagramExp" style="color:#ffcc99;">g</span> Full pay</td>
+                  </tr>
+                </tbody></table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="hidden" name="ctl00$ContentPlaceHolder1$hdSeatList" id="ctl00_ContentPlaceHolder1_hdSeatList">
+                <input type="hidden" name="ctl00$ContentPlaceHolder1$hdRemark" id="ctl00_ContentPlaceHolder1_hdRemark">
+                
+<!-- Seats table blow -->
+<table width="100%" border="1" cellspacing="0" cellpadding="4" id="SeatsTable" bordercolor="gray" style="border-color:gray;border:1px;">
+      <tbody><tr>
+        <td colspan="4" align="left">&nbsp;</td>
+        <td width="24%" align="left" class="seat_fullpay">
+            <input type="checkbox" name="cb" value="0">
+        </td>
+      </tr>
+
+
+	<tr>
+		<td width="24%" align="left">
+		<table width="100%" cellpadding="2" cellspacing="2" border="0">
+			<tbody>
+				<tr>
+					<td nowrap="">
+					<input type="checkbox" name="cb" value="0">
+					<b>1</b></td>
+					<td align="right" width="100%" class="seat_available"></td>
+				</tr>
+			</tbody>
+		</table></td>
+		<td width="24%" align="left">
+		<table width="100%" cellpadding="2" cellspacing="2" border="0">
+			<tbody>
+				<tr>
+					<td nowrap="">
+					<input type="checkbox" name="cb" value="0">
+					<b>2</b></td>
+					<td align="right" width="100%" class="seat_available"></td>
+				</tr>
+			</tbody>
+		</table></td>
+		<td width="4%" align="left">&nbsp;</td>
+		<td width="24%" align="left">
+		<table width="100%" cellpadding="2" cellspacing="2" border="0">
+			<tbody>
+				<tr>
+					<td nowrap="">
+					<input type="checkbox" name="cb" value="0">
+					<b>3</b></td>
+					<td align="right" width="100%" class="seat_available"></td>
+				</tr>
+			</tbody>
+		</table></td>
+		<td width="24%" align="left">
+		<table width="100%" cellpadding="2" cellspacing="2" border="0">
+			<tbody>
+				<tr>
+					<td nowrap="">
+					<input type="checkbox" name="cb" value="0">
+					<b>4</b></td>
+					<td align="right" width="100%" class="seat_available"></td>
+				</tr>
+			</tbody>
+		</table></td>
+	</tr>
+
+
+
+
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>5</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>6</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>7</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>8</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>9</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>10</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>11</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>12</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>13</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>14</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>15</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>16</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>17</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>18</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>19</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>20</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="3"><b>21</b></td>
+		                <td align="right" width="100%" class="seat_fullpay">
+
+<table width="100%" cellpadding="1" cellspacing="0"><tbody><tr><td align="left">M</td><td align="right"><a href="OrderDetail.aspx?id=31139">31139</a></td></tr><tr><td colspan="2" align="right">Marie.Lam</td></tr><tr><td colspan="2" align="right">7186392975</td></tr></tbody></table>
+
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="3"><b>22</b></td>
+		                <td align="right" width="100%" class="seat_fullpay">
+
+<table width="100%" cellpadding="1" cellspacing="0"><tbody><tr><td align="left">M</td><td align="right"><a href="OrderDetail.aspx?id=31139">31139</a></td></tr><tr><td colspan="2" align="right">Marie.Lam</td></tr><tr><td colspan="2" align="right">7186392975</td></tr></tbody></table>
+
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="3"><b>23</b></td>
+		                <td align="right" width="100%" class="seat_fullpay">
+
+<table width="100%" cellpadding="1" cellspacing="0"><tbody><tr><td align="left">M</td><td align="right"><a href="OrderDetail.aspx?id=31139">31139</a></td></tr><tr><td colspan="2" align="right">Marie.Lam</td></tr><tr><td colspan="2" align="right">7186392975</td></tr></tbody></table>
+
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>24</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>25</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>26</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>27</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>28</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>29</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>30</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>31</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>32</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>33</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>34</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>35</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>36</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>37</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>38</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>39</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>40</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>41</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>42</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>43</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>44</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>45</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>46</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>47</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>48</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>49</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>50</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>51</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>52</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>53</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>54</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+<td width="4%" align="left">&nbsp;</td>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>55</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>56</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td>
+</tr>
+
+<tr>
+
+            <td width="24%" align="left">
+                <table width="100%" cellpadding="2" cellspacing="2" border="0">
+	                <tbody><tr>
+		                <td nowrap=""><input type="checkbox" name="cb" value="0"><b>57</b></td>
+		                <td align="right" width="100%" class="seat_available">
+                        </td>
+	                </tr>
+                </tbody></table> 
+</td><td colspan="4">&nbsp;</td></tr>
+</tbody></table>
+
+<!-- End of Seats table -->
+
+
+            </td>
+        </tr>
+    </tbody></table>
+    
+    
+        <table width="100%" border="1" style="border-collapse:collapse;" class="detail_view">
+    
+        </table>
+    
+
+
+</div>

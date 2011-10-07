@@ -1,0 +1,91 @@
+<%= content_for :head do %>
+<script type="text/javascript">
+$(function(){
+	$('#edit_div').dialog({ autoOpen: false, width: 600});
+});
+</script>
+<style type="text/css" >
+	.deleted {font-style:italic;color:#666;text-decoration:line-through;}
+	#order_title {border: solid 1px gray;background-color:green;}
+</style>
+<% end %>
+<div id="order_title">
+	<div id="order_number">
+		订单号：<br />
+		<%= @shop_order.id %>
+		<%= @shop_order.order_number %>
+		Type:
+		<%= @shop_order.order_type %>
+	</div>
+	
+	<div id="schedule_title">
+		<%= render :partial => 'admin/schedules/schedule_title' %>
+	</div>
+</div>
+
+<div>
+	State: <%= @shop_order.state %>
+	Created by: <%= @shop_order.created_by %>
+	Operator: <%= @shop_order.operator %>
+	Created at: <%= @shop_order.created_at %>
+	Updated at: <%= @shop_order.updated_at %>
+</div>
+
+<div id='customer_info'><%= render :partial => 'customer' %></div>
+
+<div>
+	<h2>Items</h2>
+	<% if @shop_order.items %>
+	<% @shop_order.items.each do |item| %>
+	<p>
+		Room: <%= item.room_number %>
+	</p>
+	<p>
+		Adult: <%= item.num_adult %>
+		Child: <%= item.num_child %>
+		Total: <%= item.num_total %>
+	</p>
+	<p>
+		Amount: <%= item.amount %>
+	</p>
+	<p>
+		remark: <%= item.remark %>
+	</p>
+	<p>
+		Created at: <%= item.created_at %>
+	</p>
+	<p>
+		Updated at: <%= item.updated_at %>
+	</p>
+	<% end %>
+	<% else %>
+	<p>
+		No items.
+	</p>
+	<% end %>
+</div>
+
+<% if @shop_order.price %>
+<div>
+	<h2>Prices</h2>
+	<p>
+		Rooms: <%= @shop_order.price.num_rooms %>
+	</p>
+</div>
+<% else %>
+<div>
+	<p>
+		No price's info.
+	</p>
+</div>
+<% end %>
+
+<div>
+	<h2>Payment</h2>
+</div>
+
+<div id="edit_div" style="display:none;">
+	<div id="form"><form></form></div>
+</div>
+
+

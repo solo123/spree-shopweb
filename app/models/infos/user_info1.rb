@@ -1,4 +1,4 @@
-class UserInfo < InfosDb
+class Infos::UserInfo < InfosDb
   has_many :telephones, :as => :tel_number, :dependent => :destroy
   accepts_nested_attributes_for :telephones, :allow_destroy => true
   
