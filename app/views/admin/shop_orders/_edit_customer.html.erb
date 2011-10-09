@@ -1,10 +1,31 @@
+
+
+<p>
+	<input type='text' id='search_text' onchange="search();" />
+	<input type='radio' name='search_type' id='search_type_name' value='name' onchange="search();" />
+	<label for='search_type_name'>By Name</label>
+	<input type='radio' name='search_type' id='search_type_tel' value='tel' onchange="search();" />
+	<label for='search_type_tel'>By Tel</label>
+	<input type='radio' name='search_type' id='search_type_email' value='email' onchange="search();" />
+	<label for='search_type_email'>By Email</label>
+	<input type='radio' name='search_type' id='search_type_address' value='address' onchange="search();" />
+	<label for='search_type_address'>By Address</label>
+</p>
+
+<div id='customers_list'></div>
+<script type="text/javascript">
+	function search(){
+		var txt = $('#search_text').val();
+		var typ = $("input[name='search_type']:checked").val();
+		//alert(txt + '|' + typ);
+		$.get('../customers/search', {q: txt, type: typ}, function(data){
+			$('#customers_list').html(data);
+			make_table_click();
+		});
+	}
+</script>
 <%= form_for( @shop_order, :url => admin_shop_order_path(@shop_order), :remote => true) do |f| %>
-  <div class="yui-g">
-	<%= f.field_container :customer_id do %>
-		<%= f.label :customer_id %>:
-		<%= f.text_field :customer_id %>  	
-	<% end %>
-  </div>
+	<%= f.hidden_field :customer_id %>  	
 
   <div class="actions">
     <%= f.submit %>

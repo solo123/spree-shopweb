@@ -3,6 +3,13 @@
 $(function(){
 	$('#edit_div').dialog({ autoOpen: false, width: 600});
 });
+
+function make_table_click(){
+	$('.select_table tbody tr').click(function(){
+		var row = $(this);
+		$('#operates_order_customer_id').val(row.attr('tag'));
+	});
+}
 </script>
 <style type="text/css" >
 	.deleted {font-style:italic;color:#666;text-decoration:line-through;}
@@ -35,6 +42,7 @@ $(function(){
 
 <div>
 	<h2>Items</h2>
+	<%= link_to 'add', edit_admin_shop_order_path(@shop_order) + '?p=add_item', :remote => true %>
 	<% if @shop_order.items %>
 	<% @shop_order.items.each do |item| %>
 	<p>
@@ -84,8 +92,6 @@ $(function(){
 	<h2>Payment</h2>
 </div>
 
-<div id="edit_div" style="display:none;">
-	<div id="form"><form></form></div>
-</div>
+<div id="edit_div" style="display:none;"></div>
 
 

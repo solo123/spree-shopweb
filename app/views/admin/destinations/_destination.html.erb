@@ -2,8 +2,8 @@
 	<td><%= destination.id %></td>
 	<td><%= destination.title %></td>
 	<td><%= destination.title_cn %></td>
-	<td><%= destination.created_at.localtime if destination.created_at %></td>
-	<td><%= destination.updated_at.localtime if destination.updated_at %></td>
+	<td><%= destination.created_at.localtime.strftime('%Y-%m-%d') if destination.created_at %></td>
+	<td><%= destination.updated_at.localtime.strftime('%Y-%m-%d') if destination.updated_at %></td>
 	<td><%= destination.status_text %></td>
 	<td>
 		<%= link_to 'Edit', edit_admin_destination_path(destination), :remote => true %> |

@@ -25,6 +25,14 @@ class Admin::ShopOrdersController < Admin::BaseController
     @shop_order.update_attributes(params[:operates_order])
   end
   
+  def new
+    @shop_order = Operates::Order.new
+  end
+  def create
+    @shop_order = Operates::Order.new(params[:shop_order])
+    @shop_order.save
+    redirect_to :action => 'show', :id => @shop_order
+  end
 
 
 end

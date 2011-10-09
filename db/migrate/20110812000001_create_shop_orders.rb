@@ -48,7 +48,7 @@ class CreateShopOrders < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :shop_orders
+    drop_table :orders
     drop_table :order_prices
     drop_table :order_operates
     drop_table :order_items

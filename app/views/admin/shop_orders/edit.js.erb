@@ -1,5 +1,10 @@
-$("#form > form")
-	.replaceWith("<%= escape_javascript(render(:partial => "edit_customer"))%>");
+<% if params[:p] == 'customer' %>
+$("#edit_div")
+	.html("<%= escape_javascript(render(:partial => "edit_customer"))%>");
+<% elsif params[:p] == 'add_item' %>
+$("#edit_div")
+	.html("<%= escape_javascript(render(:partial => "new_item"))%>");
+<% end %>
 $('#edit_div')
 	.dialog('option', 'title', 'Customer (select)')
 	.dialog('open');

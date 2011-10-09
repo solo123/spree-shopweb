@@ -11,6 +11,20 @@ class Admin::CustomersController < Admin::BaseController
     @customers = @search.paginate(pagination_options)
   end
   
-
+  def show
+    if params[:id] == 'search'
+      @customers = []
+      if params[:type]
+        if params[:type] == 'name'
+          s = params[:q]
+          @customers = Infos::UserInfo.where('first_name like "%'+ s +'%"')
+        elsif params[:type] == 'tel'
+        elsif params[:type] == 'email'
+        elsif params[:type] == 'address'
+        end
+      end
+      render 'search', :layout => false
+    end
+  end
   
 end
