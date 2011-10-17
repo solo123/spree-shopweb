@@ -1,0 +1,4 @@
+$("#<%= dom_id(@infos_tour) %>")
+	.replaceWith("<%= escape_javascript(render(:partial => 'tour', :locals => {:tour => @infos_tour})) %>");
+
+$("#edit_div").dialog('close');

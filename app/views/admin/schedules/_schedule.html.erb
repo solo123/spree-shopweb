@@ -1,0 +1,10 @@
+<tr id="<%= dom_id s %>" class='<%= cycle('row', 'alt-row') %>'>
+    <td style="font-weight:bold;text-align:center;text-decoration:underline;"><%= link_to s.id, admin_schedule_path(s) %></td>
+    <td><span class="tour-name"><%= s.tour.title_cn %></span><br /><%= s.tour.title %></td>
+    <td><%= s.tour.days %></td>
+    <td><%= s.price.price_adult if s.price %></td>
+    <td><%= s.departure_date %></td>
+    <td><%#= s.schedule_assignment.tour_guide_id if s.schedule_assignment %></td>
+    <td><%#= s.schedule_assignment.driver_id if s.schedule_assignment %></td>
+    <td><%= s.status %></td>
+</tr>

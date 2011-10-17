@@ -18,7 +18,7 @@
   <% @destinations.each do |d| %>
   	<li title="<%=h d.title%>">
 	  	<%= image_tag d.photo.photo_s if d.photo && d.photo.photo_s %>
-			<%= link_to d.title, d %>
+			<%= link_to d.title, destination_path(d) %>
 		</li>
   <% end %>
   <div class="clear"></div>

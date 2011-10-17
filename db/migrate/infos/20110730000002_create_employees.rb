@@ -1,8 +1,4 @@
 class CreateEmployees < ActiveRecord::Migration
-  def self.connection
-    InfosDb.connection
-  end
-
   def self.up
     create_table :telephones do |t|
       t.string :tel_number_type
@@ -19,7 +15,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :remark
       t.timestamps
     end
-    create_table :t_addresses do |t|
+    create_table :addresses do |t|
       t.string :address_data_type
       t.integer :address_data_id
       t.string :address1
@@ -76,7 +72,7 @@ class CreateEmployees < ActiveRecord::Migration
   def self.down
     drop_table :telephones
     drop_table :emails
-    drop_table :t_addresses
+    drop_table :addresses
     drop_table :companies
     drop_table :company_accounts
     drop_table :contacts

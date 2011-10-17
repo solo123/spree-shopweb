@@ -1,6 +1,4 @@
 <%= content_for :head do %>
-<%= javascript_include_tag 'jqueryui/jquery-ui-1.8.13.custom.min.js' %>
-<%= stylesheet_link_tag '/javascripts/jqueryui/jquery-ui-1.8.13.custom.css' %>
 <script type='text/javascript'>
 $(function(){
 	
@@ -19,12 +17,18 @@ $(function(){
 <%= render :partial => 'admin/shared/schedule_sub_menu' %>
 <%= render :partial => 'admin/shared/quick_toolbar' %>
 <div class='toolbar'>
-    <%= form_for [:admin, @search] do |f| %>
+    <%= form_for @search, :url => admin_schedules_path do |f| %>
+    <ul class="actions">
+    	<li>
     	Departure 
     	from: <%= f.text_field :departure_date_greater_than_or_equal_to, :size => 7 %> 
     	to: <%= f.text_field :departure_date_less_than_or_equal_to, :size => 7 %>
     	<%= button t('search') %>
+    	</li>
+    	<li>
     	<%= button_link_to t("generate_schedule"), 'schedules/generate', { :icon => 'add', :id => 'generate_schedule'} %>
+    	</li>
+    </ul>
     <% end %>  
   <br class='clear' />
 </div>
@@ -44,18 +48,9 @@ $(function(){
       <th>Status</th>
   </tr>
 <% @collection.each do |s| %>
-  <tr id="<%= dom_id s %>" class='<%= cycle('row', 'alt-row') %>'>
-      <td style="font-weight:bold;text-align:center;text-decoration:underline;"><%= link_to s.id %></td>
-      <td><span class="tour-name"><%= s.tour.title_cn %></span><br /><%= s.tour.title %></td>
-      <td><%= s.tour.days %></td>
-      <td><%= s.schedule_price.price_adult if s.schedule_price %></td>
-      <td><%= s.departure_date %></td>
-      <td><%= s.schedule_assignment.tour_guide_id if s.schedule_assignment %></td>
-      <td><%= s.schedule_assignment.driver_id if s.schedule_assignment %></td>
-      <td><%= s.status %></td>
-  </tr>
+	<%= render :partial => 'schedule', :locals => {:s => s} %>
 <% end %>
 </table>
-<%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
+<%= will_paginate(@collection, :previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
 
 

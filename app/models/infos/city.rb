@@ -1,4 +1,4 @@
-class City < InfosDb
+class Infos::City < InfosDb
   def fixtitle
     t = []
     t << self.city if self.city && self.city.length > 0

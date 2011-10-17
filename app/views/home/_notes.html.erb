@@ -1,5 +1,5 @@
 <div style="width:200px;padding:0;position: absolute;right: 20px; top: 30px;">
-	<% Page.find(:all, :conditions => 'permalink = "notices"', :order => 'updated_at desc', :limit => 2).each do |p| %>
+	<% Infos::Page.where(:permalink => "notices").order('updated_at desc').limit(2).each do |p| %>
   <div style="padding:6px;border:solid 1px #ccc; background-color: lightyellow;margin-bottom:10px;">
     <h2><%= p.title %></h2>
     <p><%= p.body %></p>

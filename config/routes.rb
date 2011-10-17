@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
   # Add your extension routes here
   root :to => 'home#index'
-  resources :destinations
-  resources :tours
-  resources :pages
-  resources :tour_orders
+  resources :destinations, :tours, :pages, :tour_orders
   match 'home(/:action)' => 'home'
-  
   
   namespace :admin do
     match 'destinations/photos' => 'destinations#photos'
@@ -31,8 +27,8 @@ Rails.application.routes.draw do
     resources :customers
     resources :vehicles
     resources :user_infos
-    
     resources :gen_schedules, :only => :index
+    
   end
-
+  match ':controller/:id/:action', :controller => /admin\/[^\/]+/
 end

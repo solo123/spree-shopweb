@@ -1,6 +1,6 @@
   <div class="yui-g">
 <%= f.field_container :city_id do %>
 	<%= f.label :city_id %>:
-	<%= select(:destination, :city_id, City.where('status=1').order('city,state,country').collect{|c| [c.fixtitle, c.id]}, {:prompt => 'Select Location'}) %>  	
+	<%= select(:infos_destination, :city_id, Infos::City.where('status=1').order('city,state,country').collect{|c| [c.fixtitle, c.id]}, {:prompt => 'Select Location'}) %>  	
 <% end %>
   </div>

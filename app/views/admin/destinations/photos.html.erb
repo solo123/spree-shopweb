@@ -7,15 +7,57 @@ $(function(){
 		else
 			$(this).siblings().attr('disabled', 'disabled');
 	});
+	
+	$('.buttons a:first')
+		.button({icons: {primary: 'ui-icon-circle-triangle-e'}})
+		.next().button({icons: {primary: 'ui-icon-close'}});
 });
+var stop_running = false;
+
+function stp(){
+	if (stop_running) return;
+	$(document).unbind('keypress', stp);
+	stop_running = confirm('Cancle updating?');
+	if (!stop_running) $(document).bind('keypress', stp);
+	
+	return false;
+}
+function update_photos(){
+	$(document).bind('keypress', stp);	
+	var cb = $("#photoset_table input[type='checkbox']:checked:first");
+	if (stop_running || cb.length < 1 ) {
+		$(document).unbind('keypress', stp);
+		return;
+	}
+
+	var tr = cb.parent().parent();
+	$('.current_line').removeClass('current_line');
+	tr.addClass('current_line');
+	var pos = tr.position();
+	$('body').scrollTop(pos.top-160);
+	
+	$.get('/admin/destinations/photos',{dest_id: tr.attr('dest'), photoset: tr.attr('photoset')}, function(data){
+		var tr = $("#photoset_table .current_line:first");
+		tr.find('td:first-child').html('<b class="process_ok">' + data + '</b>');
+		tr.removeClass('current_line');
+		update_photos();
+	});
+	
+}
 </script>
+<style type="text/css">
+.current_line {background-color: red;}
+.process_ok {color: darkGreen;}
+.buttons {margin-bottom: 1em;}
+</style>
 <% end %>
 
 <%= render :partial => 'admin/shared/product_sub_menu' %>
 <h1>Destinations Photos</h1>
-
-<%= form_tag do %>
-
+<div class='buttons'>
+	<%= link_to 'Update', 'javascript:stop_running=false;update_photos();' %>
+	<%= link_to 'Reset all', 'photos_reset' %>
+</div>
 <table id="photoset_table" style="width:auto;">
 	<thead>
 		<tr>
@@ -28,26 +70,32 @@ $(function(){
 	</thead>
 	<tbody>
 	<% @photo_set.each do |ps| %>
-	<% dest = Destination.where(['title like ?', ps.title + '%']).first %>
-	<tr>
+	<% dest = Infos::Destination.where(['title like ?', ps.title + '%']).first %>
+	<% if dest %>
+	<tr id="<%= dom_id dest %>" dest="<%= dest.id %>" photoset="<%= ps.id %>">
 		<td>
-			<% if dest %>
 				<% dest.build_photo if !dest.photo %>
 				<% if dest.photo.photoset != ps.id %>
 					<%= check_box_tag '', true, true %>
 					<%= hidden_field_tag "photo[][photo_id]", ps.id %>
 					<%= hidden_field_tag "photo[][dest_id]", dest.id %>
 				<% end %>
-			<% end %>
 		</td>
 		<td><%= ps.title %></td>
 		<td><%= ps.photos %>张</td>
-		<td><%= dest.title if dest %></td>
-		<td><%= dest.id if dest %></td>
+		<td><%= dest.title %></td>
+		<td><%= dest.id %></td>
 	</tr>
+	<% else %>
+	<tr>
+		<td></td>
+		<td><%= ps.title %></td>
+		<td><%= ps.photos %>张</td>
+		<td> ** not found ** </td>
+		<td></td>
+	</tr>
+	<% end %>
 	<% end %>
 	</tbody>
 </table>
-	<%= submit_tag 'Save' %>
-	<%= link_to 'Reset all', 'photos_reset' %>
-<% end %>
+

@@ -3,21 +3,21 @@
 <h1><%= t('destination')%></h1>
 
 <p>
-	<b>Title:</b> <%= @destination.title %>
-	<b>Title cn:</b> <%= @destination.title_cn %>
+	<b>Title:</b> <%= @infos_destination.title %>
+	<b>Title cn:</b> <%= @infos_destination.title_cn %>
 </p>
 
 <p>
 	<b>Description:</b><br />
-	<div><%= @destination.description.en %></div>
+	<div><%= @infos_destination.description.en %></div>
 </p>
 
 <p>
 	<b>Description:</b><br />
-	<div><%= @destination.description.cn %></div>
+	<div><%= @infos_destination.description.cn %></div>
 </p>
 
-<%= form_for [:admin, @destination], :html => { :multipart => true } do |form| %>
+<%= form_for [:admin, @infos_destination], :html => { :multipart => true } do |form| %>
 	<ol>
 		<li>
 			<%= form.label :destination_photos, "photo" %>

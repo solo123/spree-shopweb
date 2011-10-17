@@ -6,3 +6,4 @@
 .alt-row {background-color: #C8E0C0;}
 .row:hover, .alt-row:hover {background-color: #FFFFE0;}
 
+.index .deleted {font-style:italic;color:#666;text-decoration:line-through;}

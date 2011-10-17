@@ -1,6 +1,6 @@
-<% cms = Page.find_by_permalink(cms_title)
+<% cms = Infos::Page.find_by_permalink(cms_title)
 	if !cms
-		cms = Page.new
+		cms = Infos::Page.new
 		cms.permalink = cms_title
 		cms.save
 	end

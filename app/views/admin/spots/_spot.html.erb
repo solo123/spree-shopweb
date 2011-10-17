@@ -1,0 +1,20 @@
+<div id="<%= dom_id sp %>">
+	<div style='border:solid 1px #d3bd7e'>
+		Day <%= sp.visit_day %> - (<%= sp.visit_order %>) | 
+		<b><%= "Destination: #{sp.destination.title} (id:#{sp.destination_id})" if sp.destination %></b>
+	</div>
+	<div style='width:75px;height:75px;border:solid 1px #ccc;padding:4px;'>
+		<%= image_tag sp.destination.title_photo.photo_t if sp.destination && sp.destination.title_photo %>
+	</div>
+	<% if sp.description %>
+	<div>
+		<%= sp.description.en %>
+	</div>
+	<div>
+		<%= sp.description.cn %>
+	</div>
+	<% end %>
+	<div>
+		<%= link_to image_tag('/images/admin/icons/edit.png') + 'Edit', "/admin/tours/#{params[:tour_id]}/spots/#{sp.id}/edit", :remote => true   %>
+	</div>
+</div> 

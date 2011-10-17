@@ -1,49 +1,38 @@
-<div>
-    <div id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_panel1">
-	
-    
-    
-    <table cellspacing="0" border="0" id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief" style="width:100%;border-collapse:collapse;">
-		<tbody><tr>
-			<td colspan="2">
-            <table width="100%" class="detail_view">
-                <tbody><tr>
-                    <td nowrap="nowrap" align="right" class="prompt">
-                        Schedule ID: 
-                        <a id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_HyperLink1" href="ScheduleEdit.aspx?id=48779">48779</a>
-                        <br>
-                        Status:[S.<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_statusLabel">1</span>,
-                        T.<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_tourStatusLabel">1</span>]</td>
-                    <td width="100%" align="center">
-                        <a id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_lnkTourNameCn" class="head01" href="TourDetail.aspx?id=129">【華盛頓DC.費城.明珠海港-白宮國會】</a>
-                        -<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_lbDays" class="head02">2天1夜</span>-
-                        <span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_lbSubtitle" class="head02"></span>
-                        <br>
-                        <a id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_TourNameLabel" class="head01" href="TourDetail.aspx?id=129">WDC.Philadelphia.White House </a></td>
-                    <td nowrap="nowrap">
-                        出發:<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_startDateLabel" class="content">9/17/2011</span><br>
-                        返回:<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_endDateLabel" class="content">9/18/2011</span></td>
-                </tr>
-            </tbody></table>
-            <table width="100%" class="detail_view">
-                <tbody><tr>
-                    <td class="prompt">
-                        价格(成人/小童): $<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_priceAdultLabel" class="content">95.00</span>
-                        / $<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_priceChildLabel" class="content">75.00</span>&nbsp;
-                        创建模式:<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_createModeLabel" class="content">1</span></td>
-                    <td align="right">
-                        createMode: 预定人数:
-                        <span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_bookCustomersLabel" class="content">0</span>
-                        / 已付款人数:<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_actualCustomersLabel" class="content">3</span>
-                        / 客房总数:<span id="ctl00_ContentPlaceHolder1_ScheduleBriefCtl1_fvScheduleBrief_actualRoomsLabel" class="content">1.0</span></td>
-                </tr>
-            </tbody></table>
-        </td>
-		</tr>
-	</tbody></table>
-
+<div class="schedule-title">
+	<div class="s-id">
+		Schedule ID: <b><%= s.id %></b><br />
+		Status: <b><%= s.status %></b>
+	</div>
+	<div class="s-title">
+		<%= s.tour.title_cn%> <%= s.tour.days %>日游<br />
+		<%= s.tour.title %> 
+	</div>
+	<div class="s-date">
+		出發: <b><%= s.departure_date.strftime("%Y-%m-%d") %></b><br />
+	  返回: <b><%= s.return_date.strftime("%Y-%m-%d") %></b>
+	</div>
+	<div class="s-price">
+		价格: 
+		1人:<b><%= s.price.price1 %></b> / 
+		2人:<b><%= s.price.price2 %></b> / 
+		3人:<b><%= s.price.price3 %></b> / 
+		4人:<b><%= s.price.price4 %></b> 
+	</div>
+	<div class="s-info">
+		预定人数: <b><%= s.book_customers %></b> / 
+		已付款人数:<b><%= s.actual_customers %></b> / 
+		客房总数:<b><%= s.actual_rooms %></b>
+	</div>
 </div>
 
-
-    <hr>
-</div>
+<%= content_for :head do %>
+<style type="text/css">
+.schedule-title {border:solid 1px green;position:relative;margin-bottom:6px;}
+.schedule-title div {border:solid 1px red;}
+.schedule-title .s-id {top:0;position:absolute;}
+.schedule-title .s-title {font-size:200%;font-weight:bold;width: 600px;margin:0 auto;text-align:center;}
+.schedule-title .s-date {position:absolute;top:0;right:0;}
+.schedule-title .s-price {position:absolute;bottom:4px;}
+.schedule-title .s-info {position:absolute;bottom:4px;right:0;}
+</style>
+<% end %>

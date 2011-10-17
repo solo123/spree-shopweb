@@ -1,5 +1,1 @@
-$("#<%= dom_id(@destination) %>").replaceWith("<%= escape_javascript(render(:partial => @destination)) %>");
-<% @destination = Destination.new # reset for new form %>
-$(".edit_destination").replaceWith("<%= escape_javascript(render(:partial => "form"))%>")
-$(".new_destination")[0].reset();
 $("#edit_div").dialog('close');

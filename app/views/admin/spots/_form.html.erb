@@ -1,12 +1,19 @@
-<% @tour = Tour.find(params[:tour_id]) 
-	 @spot.build_description if !@spot.description
+<% 
+	@infos_spot.build_description if !@infos_spot.description
+	if @infos_spot.id
+		pth = "/admin/tours/#{params[:tour_id]}/spots/#{params[:id]}"
+	else
+		pth = "/admin/tours/#{params[:tour_id]}/spots"
+	end
 %>
-<%= form_for([:admin, @tour, @spot]) do |f| %>
+
+<%= form_for(@infos_spot, :url => pth, :remote => true) do |f| %>
   	<div class="yui-g">
 	<%= f.fields_for :destination_id do %>
 		<%= f.label :destination_id %><br />
-		<%= select(:spot, :destination_id, Destination.all.collect{|d| [d.title, d.id]}, {:prompt => 'Select Destination'}) %>  	
+		<%= select(:infos_spot, :destination_id, Infos::Destination.all.collect{|d| [d.title, d.id]}, {:prompt => 'Select Destination'}) %>  	
 	<% end %>
+	
 		</div>
 
   <div class="yui-g">

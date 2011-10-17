@@ -1,2 +1,4 @@
-$('<%= escape_javascript(render(:partial => @destination))%>').appendTo('#destinations');
-$("#new_destination")[0].reset();
+$("#destinations tbody")
+	.append("<%= escape_javascript(render(:partial => 'destination', :locals => {:destination => @infos_destination})) %>");
+
+$("#edit_div").dialog('close');

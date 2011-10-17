@@ -1,7 +1,4 @@
 class CreateShopOrders < ActiveRecord::Migration
-  def self.connection
-    OperatesDb.connection
-  end
   def self.up
     create_table :orders do |t|
       t.integer :customer_id

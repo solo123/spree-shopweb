@@ -1,13 +1,11 @@
 class CreateTours < ActiveRecord::Migration
-  def self.connection
-    InfosDb.connection
-  end
   def self.up
     create_table :tours do |t|
     	t.string :title
     	t.string :title_cn
     	t.integer :days, :default => 0
     	t.integer :tour_type, :default => 0
+    	t.integer :title_photo_id
     	t.integer :status, :default => 0
     	t.timestamps
     end

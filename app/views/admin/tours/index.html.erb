@@ -10,7 +10,7 @@ $(function(){
 <div class="toolbar">
   <ul class="actions">
   	<li>
-  		<%= form_for [:admin, @search] do |f| %>
+  		<%= form_for( @search, :url => admin_tours_path ) do |f| %>
   		<%= f.label :title_contains, "Title" %> <%= f.text_field :title_contains, :size => 15 %> &nbsp;
   		<%= button t('search') %>
 			<% end %>
@@ -41,7 +41,7 @@ $(function(){
   <th>operate</th>
   </tr>
 <% @collection.each do |tour| %>
-	<%= render tour %>
+	<%= render :partial => 'tour', :locals => {:tour => tour} %>
 <% end %>
 </table>
 <%= will_paginate(@collection, :previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>

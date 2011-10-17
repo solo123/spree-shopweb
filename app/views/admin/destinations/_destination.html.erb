@@ -1,4 +1,4 @@
-<tr id="<%= dom_id destination%>" <%= 'class=\'deleted\'' if destination.status && destination.status < 1 %>>
+<tr id="<%= dom_id destination%>" <%= 'class=\'deleted\'' if !destination.status || destination.status < 1 %>>
 	<td><%= destination.id %></td>
 	<td><%= destination.title %></td>
 	<td><%= destination.title_cn %></td>
@@ -6,7 +6,7 @@
 	<td><%= destination.updated_at.localtime.strftime('%Y-%m-%d') if destination.updated_at %></td>
 	<td><%= destination.status_text %></td>
 	<td>
-		<%= link_to 'Edit', edit_admin_destination_path(destination), :remote => true %> |
-		<%= link_to_delete destination %>
+		<%= link_to 'Edit', '/admin/destinations/' + destination.id.to_s + '/edit', :remote => true %> |
+		<%= link_to 'Hide', '/admin/destinations/' + destination.id.to_s , :remote => true, 'data-method' => 'delete', 'data-confirm' => 'Are you sure to hide/show this Destination?' %>
 	</td>
 </tr>

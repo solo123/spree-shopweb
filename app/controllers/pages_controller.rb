@@ -1,8 +1,8 @@
 class PagesController < Spree::BaseController
   def show
-    @page = Page.find_by_permalink(params[:id])
+    @page = Infos::Page.find_by_permalink(params[:id])
     if !@page
-    	@page = Page.new
+    	@page = Infos::Page.new
     	@page.permalink = params[:id]
     	@page.save
     end

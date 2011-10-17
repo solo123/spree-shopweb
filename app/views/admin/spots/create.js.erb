@@ -1,0 +1,4 @@
+$("#spots")
+	.append("<%= escape_javascript(render(:partial => 'spot', :locals => {:sp => @infos_spot})) %>");
+
+$("#edit_div").dialog('close');

@@ -1,8 +1,4 @@
 class CreatePages < ActiveRecord::Migration
-  def self.connection
-    InfosDb.connection
-  end
-
   def self.up
     create_table :pages do |t|
       t.string :title

@@ -1,12 +1,10 @@
 class CreateDestinations < ActiveRecord::Migration
-  def self.connection
-    InfosDb.connection
-  end
   def self.up
     create_table :destinations do |t|
     	t.string :title
     	t.string :title_cn
     	t.integer :city_id
+    	t.integer :title_photo_id
     	t.integer :status
     	t.timestamps
     end

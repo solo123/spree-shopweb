@@ -1,7 +1,12 @@
 <% 
-	@destination.build_description if !@destination.description
+	@infos_destination.build_description if !@infos_destination.description
+	if @infos_destination.id
+		pth = admin_destination_path(@infos_destination)
+	else
+		pth = admin_destinations_path
+	end
 %>
-<%= form_for([:admin, @destination], :remote => true) do |f| %>
+<%= form_for( @infos_destination, :url => pth, :remote => true) do |f| %>
 
 	<%= render :partial => 'admin/shared/title', :locals => {:f => f} %>
 	<%= render :partial => 'admin/shared/description', :locals => {:f => f} %>

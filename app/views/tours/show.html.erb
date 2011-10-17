@@ -19,7 +19,7 @@
         <div class="head">
             <h2><%=h @tour.title %></h2>
         </div>
-        <%=h @tour.description.en %>
+        <%=h @tour.description.en if @tour.description %>
     </div>
   <div id="order">
       <a href='/tour_orders/new?tour=<%= @tour.id %>'>Order now</a>
@@ -40,8 +40,8 @@
           	<%#= image_tag spot.destination.photo.photo_m if spot.destination.photo %>
           </div>
           <div class="dest">
-              <%= link_to spot.destination.title, spot.destination %>
-              <%=h spot.description.en %>
+              <%= link_to spot.destination.title, destination_path(spot.destination) %>
+              <%=h spot.description.en if spot.description %>
           </div>
           <div class="clear"></div>
         </div>

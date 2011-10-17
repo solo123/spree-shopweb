@@ -4,15 +4,12 @@ $(function(){
 	$('#edit_div').dialog({ autoOpen: false, width: 600});
 });
 </script>
-<style type="text/css" >
-	.deleted {font-style:italic;color:#666;text-decoration:line-through;}
-</style>
 <% end %>
 <%= render :partial => 'admin/shared/product_sub_menu' %>
 <div class="toolbar">
   <ul class="actions">
   	<li>
-  		<%= form_for [:admin, @search] do |f| %>
+			<%= form_for( @search, :url => admin_destinations_path ) do |f| %>
   		<%= f.label :title_contains, "Title" %> <%= f.text_field :title_contains, :size => 15 %> &nbsp;
   		<%= button t('search') %>
 			<% end %>
@@ -40,8 +37,8 @@ $(function(){
 	<th><%= t("status")%></th>
   <th>operate</th>
   </tr>
-<% @collection.each do |destination| %>
-	<%= render destination %>
+<% @collection.each do |d| %>
+	<%= render :partial => 'destination', :locals => {:destination => d} %>
 <% end %>
 </table>
 <%= will_paginate(@collection, :previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
