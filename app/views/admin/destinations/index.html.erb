@@ -14,9 +14,8 @@ $(function(){
   		<%= button t('search') %>
 			<% end %>
   	</li>
-    <li id="edit_destination_link">
-      <a href="destinations/new" class="button" data-remote="true" id="admin_edit_destination">
-      	<span><img alt="Add" src="/images/admin/icons/add.png?1305355888"> New Destination</span></a>
+    <li>
+    	<%= button_link_to 'New Destination', 'destinations/new', {:icon => 'add', 'data-remote' => true} %>
     </li>
     <li><a href='destinations/photos' class='button'><span><img alt="Photos" src="/images/admin/icons/pdf.png"> Photos</span></a></li>
   </ul>

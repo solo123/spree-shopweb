@@ -49,7 +49,7 @@ class CreateEmployees < ActiveRecord::Migration
     end
     create_table :employees do |t|
     	t.integer :company_id
-    	t.integer :user_id
+    	t.integer :user_info_id
     	t.string :nickname
     	t.datetime :employ_date
     	t.string :ssn
@@ -63,6 +63,7 @@ class CreateEmployees < ActiveRecord::Migration
     	t.string :last_name
     	t.string :user_type
     	t.integer :user_level, :default => 0
+    	t.string :login
     	t.string :pin
     	t.integer :status, :default => 0
     	t.timestamps

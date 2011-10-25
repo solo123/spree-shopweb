@@ -1,17 +1,27 @@
-<div class='seat paid'>
+<% 
+	seat = assignment.seats.where(:seat_number => i).first
+	css = ''
+	if seat
+		if seat.order
+			css = 'sold'
+		else
+			css = 'hold'
+		end
+	else
+		css = 'blnk'
+	end
+%>
+<div class='seat <%= css %>'>
 		<div class="seat-check">
-			<input type="checkbox" id="cb1">
-			<label for="cb1"><%= i %></label>
+			<input type="checkbox" name="checks[<%= i %>]" id="cb_<%= i %>">
+			<label for="cb_<%= i %>"><%= i %></label>
 		</div>
 		<div class="seat-pickup">
-				M and pickup at M maybe.<br />
-				airport JFK
+			<%= raw seat.message1 if seat %>
 		</div>
 		<div class="seat-info">
-				13245
-				<br />
-				Jimmy-Liang-at-Shenzhen
-				<br />
-				137-287-70073 - 211
+			<%= seat.order_id + '<br />' if seat && seat.order_id && seat.order_id > 0 %>
+			<%= raw seat.message2 if seat %>
+			&nbsp;
 		</div>
 </div>

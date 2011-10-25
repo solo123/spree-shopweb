@@ -3,8 +3,8 @@ class CreateSchedules < ActiveRecord::Migration
     create_table :schedules do |t|
     	t.integer :tour_id
     	t.string :title
-    	t.datetime :departure_date
-    	t.datetime :return_date
+    	t.date :departure_date
+    	t.date :return_date
       t.integer :book_customers
       t.integer :actual_customers
       t.integer :actual_rooms
@@ -14,7 +14,7 @@ class CreateSchedules < ActiveRecord::Migration
     create_table :schedule_assignments do |t|
       t.string :title
       t.integer :schedule_id
-      t.integer :vehicle_id
+      t.integer :bus_id
       t.integer :driver_id
       t.integer :driver_assistance_id
       t.integer :tour_guide_id
@@ -35,6 +35,9 @@ class CreateSchedules < ActiveRecord::Migration
       t.integer :schedule_assignment_id
       t.integer :seat_number
       t.integer :order_id
+      t.string :message1
+      t.string :message2
+      t.string :state
       t.timestamps
     end
   end

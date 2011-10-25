@@ -1,50 +1,43 @@
-<%= content_for :head do %>
-<%= javascript_include_tag 'jqueryui/jquery-ui-1.8.13.custom.min.js' %>
-<%= stylesheet_link_tag '/javascripts/jqueryui/jquery-ui-1.8.13.custom.css' %>
-<script type='text/javascript'>
-$(function(){
-	
-	$('#search_departure_date_greater_than_or_equal_to').datepicker({
-		showButtonPanel: true,
-		dateFormat: 'yy-mm-dd'
-	});
-	$('#search_departure_date_less_than_or_equal_to').datepicker({
-		showButtonPanel: true,
-		dateFormat: 'yy-mm-dd'
-	});	
-});
-</script>
-<% end %>
-
 <%= render :partial => 'admin/shared/schedule_sub_menu' %>
 <%= render :partial => 'admin/shared/quick_toolbar' %>
-
-
 <%= render :partial => 'schedule_title', :locals => {:s => @operates_schedule} %>
 
+<div>
 
-<table width="380" cellspacing="0" cellpadding="4" border="0" style="border: solid 1px darkgreen; width:auto;">
-  <tbody><tr class="diagram-exp">
-    <td nowrap="nowrap" align="center" class="edit_en">圖示:(<a href="ScheduleOrders.aspx">相关订单</a>)</td>
-    <td nowrap="nowrap" align="center" class="edit_en"><div class="block blnk">&nbsp;</div> Avilible</td>
-    <td nowrap="nowrap" align="center" class="edit_en"><div class="block hold">&nbsp;</div> Hold</td>
-    <td nowrap="nowrap" align="center" class="edit_en"><div class="block sold">&nbsp;</div> Sold balance</td>
-    <td nowrap="nowrap" align="center" class="edit_en"><div class="block paid">&nbsp;</div> Full pay</td>
-  </tr>
-</tbody></table>
+	<%= button_link_to 'Add bus', admin_schedule_path(@operates_schedule) + '/add_bus', {'data-remote' => true, :icon => 'add'} %>
+	<%= button_link_to 'Hold', admin_schedule_path(@operates_schedule) + '/hold', {'data-remote' => true, :icon => 'tick'} %>
+	<%= button_link_to 'Add bus', admin_schedule_path(@operates_schedule) + '/add_bus', {'data-remote' => true, :icon => 'add'} %>
+	<%= button_link_to 'Add bus', admin_schedule_path(@operates_schedule) + '/add_bus', {'data-remote' => true, :icon => 'add'} %>
+	<%= button_link_to 'Add bus', admin_schedule_path(@operates_schedule) + '/add_bus', {'data-remote' => true, :icon => 'add'} %>
 
-<div class='seat-table'>
-	<% (1..@total_seats).each do |i| %>
-	<% if ((i-1) % 4) == 0 %>
-		<div class="clear"></div>
-	<% elsif ((i-1) % 2) == 0 %>
-		<div class="space">&nbsp;</div>
-	<% end %>
-		<%= render :partial => 'seat', :locals => {:i => i, :s => @operates_schedule} %>
-	<% end %>
+
 	<div class="clear"></div>
+
+	
+	<div id="tabs">
+		<ul>
+		<% @operates_schedule.assignments.each do |assignment| %>
+			<li><a href="#tabs-<%= assignment.id %>">Bus#<%= assignment.title %></a> <span class="ui-icon ui-icon-close">Remove Tab</span></li>
+		<% end %>
+		</ul>
+		<% @operates_schedule.assignments.each do |assignment| %>
+			<%= render :partial => 'seat_table', :locals => {:assignment => assignment} %>			
+		<% end %>			
+	</div>
 </div>
 
+	<div id="dialog" title="Tab data"></div>
+	<div id="dialog_hold" title="Hold Seats">
+		<%= form_tag admin_schedule_path(@operates_schedule) + '/hold_seats',:remote => true, :id => 'hold_seat_form' do %>
+		<p>
+			<%= label_tag 'message1', 'Message' %><br />
+			<%= text_field_tag :message1 %>
+			<%= hidden_field_tag :seats %>
+			<%= hidden_field_tag :assignment_id %>
+		</p>
+			<%= button_link_to "btn", 'javascript:validate_seats()', {:icon => 'add'} %>
+		<% end %>
+	</div>
 
 
 <%= content_for :head do %>
@@ -65,5 +58,65 @@ $(function(){
 		.seat-table .seat-info {text-align: right;}
 		
 		.seat-table .seat:hover {border:solid 1px red;}
+
+	#dialog label, #dialog input { display:block; }
+	#dialog label { margin-top: 0.5em; }
+	#dialog input, #dialog textarea { width: 95%; }
+	#tabs { margin-top: 1em; }
+	#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+	#add_tab { cursor: pointer; }
 	</style>
+	<script type="text/javascript">
+	$(function() {
+		
+		$('#search_departure_date_greater_than_or_equal_to').datepicker({
+			showButtonPanel: true,
+			dateFormat: 'yy-mm-dd'
+		});
+		$('#search_departure_date_less_than_or_equal_to').datepicker({
+			showButtonPanel: true,
+			dateFormat: 'yy-mm-dd'
+		});	
+		
+		// tabs init with a custom tab template and an "add" callback filling in the content
+		var $tabs = $( "#tabs").tabs({
+			tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>",
+		});
+
+		// modal dialog init: custom buttons and a "close" callback reseting the form inside
+		var $dialog = $( "#dialog" ).dialog({
+			autoOpen: false,
+			modal: true
+		});
+
+		// close icon: removing the tab on click
+		// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
+		$( "#tabs span.ui-icon-close" ).live( "click", function() {
+			var index = $( "li", $tabs ).index( $( this ).parent() );
+			$tabs.tabs( "remove", index );
+		});
+	});
+	function validate_seats(){
+		var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
+		
+		if (tab.find('input[type="checkbox"]:checked').length == 0){
+			alert('Please select seats first.');
+			
+			return false;
+		}
+		
+		var result = '';
+		tab.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('blnk')) result += $(this).next().text() + ', '; });
+		if (result.length > 0) {
+			alert('Seats: ' + result + 'been taken. Please check again.');
+			return false;
+		}
+		
+		result = tab.find('input[type="checkbox"]:checked').map(function(){ return $(this).next().text(); }).get().join(',');
+		$('#seats').val(result);
+		$('#assignment_id').val(tab.attr('id').substr(5));
+		$('#hold_seat_form').submit();
+		return true;
+	}
+	</script>	
 <% end %>
